@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Listening B1 Practice</title>
+<style>
+:root {
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --primary-soft: #dbeafe;
+  --border: #e5e7eb;
+  --ok: #15803d;
+  --bad: #b91c1c;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: Arial, sans-serif; background: var(--bg); color: var(--text);
+}
+header {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white; padding: 24px 18px;
+}
+header h1 { margin: 0 0 8px; font-size: 28px; }
+header p { margin: 0; opacity: 0.95; line-height: 1.5; }
+.container {
+  max-width: 1100px; margin: 0 auto; padding: 20px;
+}
+.toolbar {
+  display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 18px;
+}
+button, .linkbtn {
+  border: none; border-radius: 10px; padding: 10px 14px; cursor: pointer;
+  background: white; color: var(--text); border: 1px solid var(--border);
+  text-decoration: none; font-size: 14px;
+}
+button.active {
+  background: var(--primary); color: white; border-color: var(--primary);
+}
+.grid {
+  display: grid; gap: 16px;
+}
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+}
+.meta {
+  font-size: 13px; color: var(--muted); margin-bottom: 8px;
+}
+.question {
+  font-weight: 700; margin: 10px 0 14px; font-size: 18px;
+}
+.options {
+  display: grid; gap: 10px; margin: 12px 0;
+}
+.option {
+  padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: #fafafa;
+}
+.option input { margin-right: 8px; }
+.actions {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px;
+}
+.result {
+  margin-top: 12px; font-weight: 700;
+}
+.result.ok { color: var(--ok); }
+.result.bad { color: var(--bad); }
+.answer-box, .transcript {
+  margin-top: 12px; padding: 14px; border-radius: 12px; background: #f8fafc; border: 1px solid var(--border);
+  line-height: 1.6;
+}
+.hidden { display: none; }
+.badge {
+  display: inline-block; background: var(--primary-soft); color: var(--primary); border-radius: 999px;
+  padding: 5px 10px; font-size: 12px; font-weight: 700; margin-bottom: 10px;
+}
+.score {
+  margin: 0 0 16px; padding: 14px 16px; background: #ecfeff; border: 1px solid #a5f3fc; border-radius: 12px;
+}
+.small { font-size: 13px; color: var(--muted); }
+.matching-item {
+  padding: 12px; border: 1px solid var(--border); border-radius: 12px; margin-top: 10px; background: #fafafa;
+}
+select {
+  padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border);
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <h1>Web luyện Listening B1</h1>
+    <p>Đã cập nhật dữ liệu listening theo file bạn gửi. Web có 4 phần: Part 1 trắc nghiệm, Part 2 nghe và đọc transcript, Part 3 matching, Part 4 bài nghe dài kèm câu hỏi.</p>
+  </div>
+</header>
+
+<div class="container">
+  <div class="score" id="scoreBox">Điểm hiện tại: <strong id="score">0</strong> / <span id="total">0</span></div>
+
+  <div class="toolbar">
+    <button class="tab active" data-tab="part1">Part 1</button>
+    <button class="tab" data-tab="part2">Part 2</button>
+    <button class="tab" data-tab="part3">Part 3</button>
+    <button class="tab" data-tab="part4">Part 4</button>
+    <button id="resetBtn">Làm lại toàn bộ</button>
+  </div>
+
+  <div id="content"></div>
+</div>
+
+<script>
+const DATA = {"part1": [{"id": 1, "question": "What time do they meet?", "options": {"A": "7.30pm", "B": "6.30pm", "C": "9.30pm"}, "answer": "B", "audio": "https://youtu.be/np45fcsNkUg", "transcript": "Hey Alex, it’s me. Just wanted to remind you about our plan for tonight. We’re meeting at 6:30 PM, so try not to be late! I know you usually finish work around 6, so that should give you enough time to get there. If anything changes, just let me know. Oh, and by the way, Jake might join us a bit later, around 7:30 or so. Alright, see you soon!"}, {"id": 2, "question": "What did she like the most about the movie?", "options": {"A": "the car scenes", "B": "the fight scenes", "C": "the mountain scenes"}, "answer": "C", "audio": "https://youtu.be/DMFu7TyAmEk", "transcript": "I watched the movie last weekend, and overall, I really enjoyed it. There were plenty of exciting moments, especially the fast car scenes at the beginning, which kept me on the edge of my seat. The fight scenes were also quite impressive, with a lot of action and energy. However, what stayed with me the most was the way the film showed the mountains. The wide shots of the snowy peaks and quiet valleys were absolutely beautiful and made the story feel much more powerful. Even days later, those mountain scenes are what I remember most clearly."}, {"id": 3, "question": "What does she do on her holidays?", "options": {"A": "Drawing", "B": "Walking", "C": "Cooking"}, "answer": "B", "audio": "https://youtu.be/g3cm97yFUdw", "transcript": "Holidays are the only time when I can really relax and do things at my own pace. I love being outdoors, so I usually spend a lot of time walking, especially in quiet places like parks, along the coast, or in the countryside. Long walks help me disconnect from work and enjoy the surroundings. Of course, when I have some free time in the evening, I might sit down and do a bit of drawing, and sometimes I even try cooking simple meals, but those aren’t really the main activities I look forward to on my holidays."}, {"id": 4, "question": "What does he want to be?", "options": {"A": "Reporter", "B": "Chef", "C": "Writer"}, "answer": "C", "audio": "https://youtu.be/PlRK_2QQLOw", "transcript": "People often ask me what I want to do in the future, and honestly, it wasn’t always clear to me. For a while, I considered becoming a reporter because I enjoy finding information and talking to different people. I also thought about being a chef, since I love cooking and experimenting with new recipes in my free time. However, writing has always been my true passion. I enjoy expressing ideas through words and creating stories that connect with others. That’s why, in the end, I’ve decided that I want to be a writer, even though I know it won’t be an easy path."}, {"id": 5, "question": "What will she do?", "options": {"A": "Go to the coffee shop", "B": "Go for a drive", "C": "Go on a picnic"}, "answer": "A", "audio": "https://youtu.be/6Geax0ExyK4", "transcript": "My friend Jenny has been feeling a bit tired lately, so she’s been talking about doing something relaxing this weekend. At first, she mentioned going for a drive outside the city, just to clear her head. She also briefly considered having a picnic if the weather was good. However, after thinking it through, she decided she’d rather keep things simple. She plans to go to her favorite coffee shop, sit by the window, and spend some quiet time reading and catching up on messages. Knowing Jenny, that’s exactly what she needs right now."}, {"id": 6, "question": "Where did they meet?", "options": {"A": "The parking lot", "B": "The front entrance", "C": "The school gate"}, "answer": "B", "audio": "https://youtu.be/Awk7AYe9_cw", "transcript": "Hi May, it’s John. I just wanted to remind you that we’re meeting this afternoon to visit the art exhibition by Leonard Hughes at five o’clock. At first, I thought we could meet near the parking lot, or even wait by the school gate, but that area is usually very crowded at this time of day. So in the end, I think it’s best if we meet at the front entrance of Building A, where the exhibition is being held. I’ll be standing right next to the main doors at 4:45. If you’re running late, just give me a call. See you soon!"}, {"id": 7, "question": "What country will they study next semester?", "options": {"A": "France", "B": "Italy", "C": "Germany"}, "answer": "A", "audio": "https://youtu.be/kPr53Tcv75w", "transcript": "Good morning, everyone. Before we finish today, I’d like to give you a quick overview of what we’ll be studying next semester. Some of you may remember that last year we focused on Germany, and before that, we spent quite a lot of time discussing Italian history and culture. However, next term, our main topic will be France. We’ll look at key historical events, social changes, and how the country influenced Europe as a whole. I believe this will be a particularly impressive subject, and I’m sure many of you will find it both challenging and enjoyable."}, {"id": 8, "question": "Which room will they study in?", "options": {"A": "Room 201", "B": "Room 301", "C": "Room 302"}, "answer": "B", "audio": "https://youtu.be/iZAFLEJOlqk", "transcript": "Hello everyone, this is your chemistry teacher. I’m calling to give you a quick update about our practical class this Friday. We will still meet at two o’clock as planned. Originally, the session was scheduled to take place in Room 201, and some of you may also have heard about using Room 302 as an alternative. However, due to an unexpected technical issue, the class will now be held in Room 301 instead. See you then."}, {"id": 9, "question": "How many copies did he sell?", "options": {"A": "Over 300000 copies", "B": "100.000 copies", "C": "30.000 copies"}, "answer": "A", "audio": "9. How many copies did he sell?.mp3", "transcript": "First of all, I’d like to thank all my readers for their incredible support. When my book ‘Echoes of Time’ was first released, we were thrilled to sell around one hundred thousand copies in a very short time. At that point, I already felt extremely grateful. However, the success didn’t stop there. Since then, sales have continued to grow, and so far, more than three hundred thousand copies have been sold. It’s been an amazing journey, and I truly appreciate everyone who has supported my work."}, {"id": 10, "question": "Who did she take the picture of?", "options": {"A": "The girl's team", "B": "The boy’s team", "C": "Anna, Sara and the girl's team"}, "answer": "A", "audio": "https://youtu.be/BR8RO-N1kBc", "transcript": "Last weekend, I went to watch a sports match with some friends. At first, I thought about taking a picture of the boys’ team because they were playing really well. Anna and Sara were standing nearby, and they even suggested that I include them in the photo. However, in the end, I took a picture of the girls’ team—the team I play for. We had worked hard all season, and I wanted to capture that moment."}, {"id": 11, "question": "Where do they go when they travel to India?", "options": {"A": "Go to the park", "B": "Go to famous places", "C": "Go out to eat"}, "answer": "A", "audio": "https://youtu.be/pJSXZFxDwQs", "transcript": "I’ve traveled to India several times, and people often assume that I spend most of my time visiting famous landmarks or going out to eat local food. Of course, I do enjoy trying Indian dishes, and I’ve seen some well-known places too. However, what I really like to do when I’m there is go to the park. I enjoy walking through public parks, watching people relax, and experiencing everyday life. That’s usually where I spend most of my time when I travel to India."}, {"id": 12, "question": "Which door do they need to take to get to Edinburgh?", "options": {"A": "Two", "B": "Three", "C": "Four"}, "answer": "A", "audio": "https://youtu.be/suMEeSNVKP8", "transcript": "Attention, please. The train is now preparing to depart, so passengers are advised to move quickly to their boarding doors. Passengers travelling to Edinburgh should proceed through door number two. Door three will be used for passengers going to Glasgow, and door four is reserved for local trains only. Please ensure you are at the correct door before boarding begins."}, {"id": 13, "question": "How long does it take to get to the station?", "options": {"A": "15 minutes", "B": "20 minutes", "C": "25 minutes"}, "answer": "B", "audio": "https://youtu.be/3yc-Hb0oY_U", "transcript": "Attention please, passengers travelling to the city centre. Your train will arrive at Riverside Station in approximately twenty minutes. After arriving at the station, you will need to continue your journey for another fifteen minutes to reach your final destination in the city centre. Please remain seated and listen for further announcements."}, {"id": 14, "question": "What time is the meeting?", "options": {"A": "2pm", "B": "10am", "C": "11am"}, "answer": "A", "audio": "https://youtu.be/Lv9TL2PkBeY", "transcript": "This is a reminder of Mr. Thompson’s schedule. Today, he will leave for the airport at 10 a.m., and at 11 a.m. he is scheduled to complete the check-in process for his flight to Ho Chi Minh City. Please note that tomorrow afternoon at 2 p.m., he has an important meeting with a business partner. All necessary documents should be prepared in advance."}, {"id": 15, "question": "What did she do last weekend?", "options": {"A": "Stayed at home", "B": "Went shopping", "C": "Went to the cinema"}, "answer": "A", "audio": "https://youtu.be/Ixb0keKKQ64", "transcript": "Last weekend was much quieter than usual for me. I had actually planned to go shopping on Saturday and even thought about watching a movie at the cinema in the evening. However, after a long and tiring week at work, I decided to cancel those plans. Instead, I stayed at home, caught up on some rest, and spent time reading and cooking. It wasn’t very exciting, but it was exactly what I needed."}, {"id": 16, "question": "What are the similarities between his mom and aunt?", "options": {"A": "They were thin", "B": "They have the same eye color", "C": "They have the same hair color"}, "answer": "A", "audio": "https://youtu.be/lF4z-GB2UVg", "transcript": "My mom and my aunt Ann grew up together and were very close when they were younger. Although they look quite different now, there were some similarities between them in the past. My mom has brown eyes, while Aunt Ann’s eyes are blue, so that’s one clear difference. Their hair color was also never the same—my mom always had dark hair, but Aunt Ann preferred lighter shades. However, both of them were very slim when they were young, especially during their college years. People often noticed how thin they both were, even though their styles and personalities were quite different."}], "part2": [{"id": "P2-14A", "topic": "A place for studying", "speaker": "On public transport", "audio": "P2-14.1. On public transport.mp3", "transcript": "The distance from my house to school is 20 km, and it usually takes me an hour to get there. So, when I'm on the train, I use the time to do homework and review the lessons for the day. Some people say that studying like this can be distracting, but I find it very effective for me."}, {"id": "P2-14B", "topic": "A place for studying", "speaker": "At home", "audio": "P2_14.2. At home .mp3", "transcript": "I don't like studying in very crowded places because I can't focus well. I usually sit on the sofa in the living room to study. My parents often travel for work, so my house is very quiet."}, {"id": "P2-14C", "topic": "A place for studying", "speaker": "In the coffee shop", "audio": "P2_14.3. In the coffee shop .mp3", "transcript": "I don't like studying in very quiet places such as at home or in the library because I get sleepy easily and might even fall asleep while studying. There's a coffee shop near my house, and I often go there to study because the presence of other people makes me feel more motivated. I find that I achieve higher productivity and efficiency in my studies when I'm there."}, {"id": "P2-14D", "topic": "A place for studying", "speaker": "In the park", "audio": "P2_14.4. In the park .mp3", "transcript": "I notice that most people prefer doing their homework in the classroom, but for me, those chairs are way too hard and leave me sore all day. I prefer sitting under the trees in the park to study—it's cool, and the air is fresh. There's a famous coffee shop across from where I sit, and they serve really good coffee."}], "part3": [{"id": 15, "topic": "Arts", "audio": "P3_15. Topic: Arts..wav", "dialogue": ["M: What magazine are you reading?", "W: I'm reading about art.", "M: That sounds interesting. I think art is only for the wealthy. Poor people don’t have the opportunity or time to enjoy art.", "W: Actually, art isn’t limited to any one group. If we have an interest, we can access art because it’s all around us.", "M: I wish that when I was a child and in school, I had more exposure to the arts. I'm really glad that now, when my child goes to school, they can have more exposure to the arts.", "W: Yes, that's great news. I hope that the authorities and the government will invest more in the arts and make them accessible to everyone, especially by adding more art classes in schools so that students can be exposed to art early on.", "M: I agree. Children should be introduced to the arts early so they can develop their own sense of beauty sooner.", "W: I think with the development of technology, where we just scroll a bit and see art videos and images flooding social media, art is becoming more accessible than ever.", "M: Really? Let's wait and see how it unfolds."], "matching": [{"statement": "Art is only suitable for the privileged few", "answer": "M"}, {"statement": "The government should invest more in arts", "answer": "W"}, {"statement": "Children should be exposed to art early", "answer": "B"}, {"statement": "In the future, art will become more accessible", "answer": "W"}]}], "part4": [{"id": "4A", "topic": "television series", "audio": "P4_16. Topic: television series .wav", "transcript": "In recent years, television series have become one of the most popular forms of entertainment worldwide. Unlike standalone films, series allow stories and characters to develop gradually over time, which helps maintain audience interest across multiple episodes and seasons. One key factor behind the success of many television series is their ability to maintain a consistent standard. Viewers tend to remain loyal to a series when the storytelling, acting, and production quality remain strong from the beginning to the end, rather than fluctuating between episodes. Another important aspect to consider is how audience behaviour has changed. With the rise of streaming platforms, viewers now watch episodes in different ways, such as binge-watching entire seasons in a short period of time. As a result, producers and writers are adapting their approach to structure, pacing, and episode length. This clearly demonstrates that modern viewing patterns are not only affecting how audiences consume content, but are also shaping how television series are planned, written, and produced today.", "questions": [{"question": "What does the speaker say is one major strength of successful television series?", "options": {"A": "They focus mainly on famous actors.", "B": "It has the consistent quality throughout.", "C": "They are usually shorter than films."}, "answer": "B"}, {"question": "What does the speaker suggest about changes in television production?", "options": {"A": "Streaming platforms have reduced production costs.", "B": "Television series are becoming less creative.", "C": "Viewer habits influence the way that series are made."}, "answer": "C"}]}, {"id": "4B", "topic": "making plans", "audio": "P4_16. Topic: making plans.wav", "transcript": "In my experience, planning is something people often misunderstand. Many assume that having a plan means you lose flexibility, but I’ve found the opposite to be true. When I take the time to plan ahead, it becomes much easier to choose between different options instead of reacting at the last minute. Planning forces you to think about priorities. Once you know what really matters, decision-making becomes clearer and less stressful. Rather than feeling restricted, you gain confidence because you understand why you are choosing one path over another. That said, planning does come with certain challenges. You can’t plan effectively without accepting limitations. Whether it’s time, energy, or resources, you have to be honest with yourself and set boundaries. This can be uncomfortable, but it’s necessary. Ultimately, I believe planning works best when people recognise both its benefits and its limits. It’s not about controlling everything, but about making thoughtful choices within realistic constraints.", "questions": [{"question": "What does the speaker say is a key benefit of making plans?", "options": {"A": "They make life more predictable.", "B": "They help you make decisions.", "C": "They reduce the need for communication."}, "answer": "B"}, {"question": "What does the speaker mention as a difficulty when planning?", "options": {"A": "It discourages people from taking risks.", "B": "It requires you to set yourself certain limits.", "C": "It only works in professional situations."}, "answer": "B"}]}, {"id": "4C", "topic": "a book about a life of a scientist", "audio": "P4_16. Topic: a book about a life of a scientist.wav", "transcript": "The book offers an overview of the scientist’s life, combining personal experiences with explanations of major discoveries. Rather than overwhelming readers with technical detail, the author makes a clear effort to present difficult concepts in an accessible way, ensuring that non-specialist readers can follow the scientific ideas being discussed. For those familiar with earlier biographies of this scientist, much of the material will feel familiar. The structure and content closely reflect themes already explored in a previous publication, although this version places slightly more emphasis on storytelling than analysis. Overall, while the book may not introduce many new facts, it succeeds in presenting the scientist’s life and work in a clear and approachable manner.", "questions": [{"question": "What does the reviewer say about the style of the book?", "options": {"A": "It uses simple language to describe complex ideas", "B": "It focuses mainly on scientific data.", "C": "It is written mainly for academic readers."}, "answer": "A"}, {"question": "What does the reviewer say about the book compared to others?", "options": {"A": "It presents completely new information.", "B": "It is more detailed than earlier biographies.", "C": "It is similar to the previous book about the scientist"}, "answer": "C"}]}, {"id": "4D", "topic": "criticism of the new novel", "audio": "P4_17. Topic: criticism of the new novel .wav", "transcript": "The novel has attracted a great deal of attention since its release, and opinions among readers have been mixed. While some critics have pointed out weaknesses in the pacing of the story, I believe there are several strengths worth mentioning. In particular, the author has created characters that feel realistic and engaging. Their personalities are well developed, making it easy for readers to become emotionally invested in their experiences, even when the plot itself slows down. Although this book may not be flawless, it represents an important step in the writer’s career. Given the level of public interest and discussion surrounding its release, I expect it to significantly increase the author’s recognition and readership. Overall, despite certain criticisms, this novel is likely to play a key role in shaping how the author is perceived in the literary world.", "questions": [{"question": "What did the reviewer think was a positive aspect of the novel?", "options": {"A": "The writing style was highly original.", "B": "The characters were interesting.", "C": "The storyline was unpredictable."}, "answer": "B"}, {"question": "What does the reviewer suggest about the impact of the novel?", "options": {"A": "It may divide readers’ opinions.", "B": "It will establish the author's popularity.", "C": "It will mainly appeal to academic audiences."}, "answer": "B"}]}, {"id": "4E", "topic": "A break from studying", "audio": "P4_17. Topic: A break from studying.wav", "transcript": "After finishing secondary school, I decided not to apply to university immediately. At the time, many of my friends were eager to continue their studies, but I felt unsure about what I wanted to do next and didn’t feel prepared for the demands of higher education. Instead, I took a year off and spent that time working part-time and travelling. Being away from a structured academic environment forced me to make decisions on my own, manage my finances, and take responsibility for my daily life. Looking back, that year was extremely valuable. It gave me time to reflect on my goals and helped me grow personally. By the time I eventually started university, I felt more confident, motivated, and capable of handling independence. Although taking a break isn’t the right choice for everyone, for me it was an important step before continuing my education.", "questions": [{"question": "Why didn’t he go straight to the university?", "options": {"A": "He wanted to earn money before studying.", "B": "His family advised him to wait.", "C": "He wasn’t ready to start higher education"}, "answer": "C"}, {"question": "What did he think he learnt from the year’s break?", "options": {"A": "How to manage academic pressure.", "B": "To be more independent", "C": "The importance of choosing the right degree."}, "answer": "B"}]}]};
+let currentTab = "part1";
+const state = {};
+
+function el(tag, attrs={}, html="") {
+  const node = document.createElement(tag);
+  Object.entries(attrs).forEach(([k,v]) => {
+    if (k === "class") node.className = v;
+    else if (k === "dataset") Object.entries(v).forEach(([dk,dv]) => node.dataset[dk] = dv);
+    else node.setAttribute(k, v);
+  });
+  node.innerHTML = html;
+  return node;
+}
+
+function getTotalQuestionCount() {
+  return DATA.part1.length + DATA.part4.reduce((n, item) => n + item.questions.length, 0);
+}
+
+function updateScore() {
+  let score = 0;
+  let total = getTotalQuestionCount();
+  for (const [key, val] of Object.entries(state)) {
+    if (val.correct === true) score += 1;
+  }
+  document.getElementById("score").textContent = score;
+  document.getElementById("total").textContent = total;
+}
+
+function createAudioLink(audio) {
+  if (!audio) return "";
+  const isUrl = /^https?:\/\//i.test(audio);
+  if (isUrl) {
+    return `<a class="linkbtn" href="${audio}" target="_blank">Mở audio</a>`;
+  }
+  return `<span class="small">Tên file audio: ${audio}</span>`;
+}
+
+function checkAnswer(key, answer, selected, resultNode) {
+  const correct = answer === selected;
+  state[key] = { selected, correct };
+  resultNode.className = "result " + (correct ? "ok" : "bad");
+  resultNode.textContent = correct ? "Đúng rồi" : `Sai. Đáp án đúng là ${answer}`;
+  updateScore();
+}
+
+function toggleBox(id) {
+  const box = document.getElementById(id);
+  box.classList.toggle("hidden");
+}
+
+function renderPart1() {
+  const wrap = el("div", {class:"grid"});
+  DATA.part1.forEach((item, idx) => {
+    const card = el("div", {class:"card"});
+    card.appendChild(el("div", {class:"badge"}, `Câu ${item.id}`));
+    card.appendChild(el("div", {class:"meta"}, item.audio ? createAudioLink(item.audio) : ""));
+    card.appendChild(el("div", {class:"question"}, item.question));
+
+    const opts = el("div", {class:"options"});
+    Object.entries(item.options).forEach(([k,v]) => {
+      const id = `p1_${idx}_${k}`;
+      const label = el("label", {class:"option", for:id}, `<input type="radio" name="p1_${idx}" id="${id}" value="${k}"> <strong>${k}.</strong> ${v}`);
+      opts.appendChild(label);
+    });
+    card.appendChild(opts);
+
+    const result = el("div", {class:"result"}, "");
+    const actions = el("div", {class:"actions"});
+    const checkBtn = el("button", {}, "Chấm câu này");
+    checkBtn.onclick = () => {
+      const chosen = document.querySelector(`input[name="p1_${idx}"]:checked`);
+      if (!chosen) {
+        result.className = "result bad";
+        result.textContent = "Bạn chưa chọn đáp án.";
+        return;
+      }
+      checkAnswer(`part1_${idx}`, item.answer, chosen.value, result);
+    };
+    const ansBtn = el("button", {}, "Hiện đáp án");
+    ansBtn.onclick = () => toggleBox(`ans_p1_${idx}`);
+    const trBtn = el("button", {}, "Hiện transcript");
+    trBtn.onclick = () => toggleBox(`tr_p1_${idx}`);
+    actions.append(checkBtn, ansBtn, trBtn);
+    card.append(actions, result);
+
+    card.appendChild(el("div", {class:"answer-box hidden", id:`ans_p1_${idx}`}, `<strong>Đáp án:</strong> ${item.answer} — ${item.options[item.answer]}`));
+    card.appendChild(el("div", {class:"transcript hidden", id:`tr_p1_${idx}`}, `<strong>Transcript:</strong><br>${item.transcript}`));
+    wrap.appendChild(card);
+  });
+  return wrap;
+}
+
+function renderPart2() {
+  const wrap = el("div", {class:"grid"});
+  wrap.appendChild(el("div", {class:"card"}, `
+    <div class="badge">Part 2</div>
+    <div class="small">Phần này trong file của bạn là dạng nghe theo chủ đề “A place for studying”, gồm 4 đoạn: trên phương tiện công cộng, ở nhà, quán cà phê và công viên.</div>
+  `));
+  DATA.part2.forEach((item, idx) => {
+    const card = el("div", {class:"card"});
+    card.appendChild(el("div", {class:"badge"}, item.speaker));
+    card.appendChild(el("div", {class:"meta"}, createAudioLink(item.audio)));
+    card.appendChild(el("div", {class:"question"}, item.topic));
+    const trBtn = el("button", {}, "Hiện transcript");
+    trBtn.onclick = () => toggleBox(`tr_p2_${idx}`);
+    card.appendChild(trBtn);
+    card.appendChild(el("div", {class:"transcript hidden", id:`tr_p2_${idx}`}, item.transcript));
+    wrap.appendChild(card);
+  });
+  return wrap;
+}
+
+function renderPart3() {
+  const wrap = el("div", {class:"grid"});
+  DATA.part3.forEach((item, idx) => {
+    const card = el("div", {class:"card"});
+    card.appendChild(el("div", {class:"badge"}, `Part 3 — ${item.topic}`));
+    card.appendChild(el("div", {class:"meta"}, createAudioLink(item.audio)));
+    const diaBtn = el("button", {}, "Hiện đoạn hội thoại");
+    diaBtn.onclick = () => toggleBox(`dialogue_${idx}`);
+    card.appendChild(diaBtn);
+    const dialogueHtml = item.dialogue.map(line => `<div style="margin:6px 0;">${line}</div>`).join("");
+    card.appendChild(el("div", {class:"transcript hidden", id:`dialogue_${idx}`}, dialogueHtml));
+
+    card.appendChild(el("div", {class:"question"}, "Chọn M / W / B cho từng ý"));
+    item.matching.forEach((m, mIdx) => {
+      const block = el("div", {class:"matching-item"});
+      block.innerHTML = `<div><strong>${mIdx+1}.</strong> ${m.statement}</div>`;
+      const select = el("select", {id:`match_${idx}_${mIdx}`}, `
+        <option value="">-- Chọn --</option>
+        <option value="M">M</option>
+        <option value="W">W</option>
+        <option value="B">B</option>
+      `);
+      block.appendChild(select);
+      const result = el("div", {class:"result", id:`match_result_${idx}_${mIdx}`}, "");
+      block.appendChild(result);
+      card.appendChild(block);
+    });
+
+    const action = el("button", {}, "Chấm Part 3");
+    action.onclick = () => {
+      item.matching.forEach((m, mIdx) => {
+        const sel = document.getElementById(`match_${idx}_${mIdx}`).value;
+        const result = document.getElementById(`match_result_${idx}_${mIdx}`);
+        if (!sel) {
+          result.className = "result bad";
+          result.textContent = "Bạn chưa chọn.";
+        } else {
+          result.className = "result " + (sel === m.answer ? "ok" : "bad");
+          result.textContent = sel === m.answer ? "Đúng" : `Sai. Đáp án: ${m.answer}`;
+        }
+      });
+    };
+    card.appendChild(el("div", {class:"small"}, "M = Man, W = Woman, B = Both"));
+    card.appendChild(action);
+    wrap.appendChild(card);
+  });
+  return wrap;
+}
+
+function renderPart4() {
+  const wrap = el("div", {class:"grid"});
+  DATA.part4.forEach((item, idx) => {
+    const card = el("div", {class:"card"});
+    card.appendChild(el("div", {class:"badge"}, `Topic: ${item.topic}`));
+    card.appendChild(el("div", {class:"meta"}, createAudioLink(item.audio)));
+    const trBtn = el("button", {}, "Hiện transcript");
+    trBtn.onclick = () => toggleBox(`tr_p4_${idx}`);
+    card.appendChild(trBtn);
+    card.appendChild(el("div", {class:"transcript hidden", id:`tr_p4_${idx}`}, item.transcript));
+
+    item.questions.forEach((q, qIdx) => {
+      card.appendChild(el("div", {class:"question"}, `${idx+1}.${qIdx+1}. ${q.question}`));
+      const opts = el("div", {class:"options"});
+      Object.entries(q.options).forEach(([k,v]) => {
+        const id = `p4_${idx}_${qIdx}_${k}`;
+        const label = el("label", {class:"option", for:id}, `<input type="radio" name="p4_${idx}_${qIdx}" id="${id}" value="${k}"> <strong>${k}.</strong> ${v}`);
+        opts.appendChild(label);
+      });
+      card.appendChild(opts);
+      const result = el("div", {class:"result", id:`r_p4_${idx}_${qIdx}`}, "");
+      card.appendChild(result);
+      const btn = el("button", {}, "Chấm câu này");
+      btn.onclick = () => {
+        const chosen = document.querySelector(`input[name="p4_${idx}_${qIdx}"]:checked`);
+        if (!chosen) {
+          result.className = "result bad";
+          result.textContent = "Bạn chưa chọn đáp án.";
+          return;
+        }
+        checkAnswer(`part4_${idx}_${qIdx}`, q.answer, chosen.value, result);
+      };
+      card.appendChild(btn);
+      card.appendChild(el("div", {class:"answer-box"}, `<strong>Đáp án:</strong> ${q.answer} — ${q.options[q.answer]}`));
+    });
+    wrap.appendChild(card);
+  });
+  return wrap;
+}
+
+function render() {
+  const content = document.getElementById("content");
+  content.innerHTML = "";
+  let block;
+  if (currentTab === "part1") block = renderPart1();
+  if (currentTab === "part2") block = renderPart2();
+  if (currentTab === "part3") block = renderPart3();
+  if (currentTab === "part4") block = renderPart4();
+  content.appendChild(block);
+  updateScore();
+}
+
+document.querySelectorAll(".tab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentTab = btn.dataset.tab;
+    render();
+  });
+});
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+  for (const key in state) delete state[key];
+  render();
+});
+
+render();
+</script>
+</body>
+</html>
