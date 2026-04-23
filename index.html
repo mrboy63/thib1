@@ -1,346 +1,227 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Listening B1 Practice</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thi B1 - Full tests</title>
 <style>
 :root {
-  --bg: #f4f7fb;
-  --card: #ffffff;
-  --text: #1f2937;
-  --muted: #6b7280;
-  --primary: #2563eb;
-  --primary-soft: #dbeafe;
-  --border: #e5e7eb;
-  --ok: #15803d;
-  --bad: #b91c1c;
+  --bg:#f5f7fb; --card:#fff; --text:#1f2937; --muted:#6b7280; --blue:#2563eb; --blue2:#1d4ed8;
+  --border:#e5e7eb; --ok:#166534; --bad:#b91c1c; --soft:#f8fafc;
 }
-* { box-sizing: border-box; }
-body {
-  margin: 0; font-family: Arial, sans-serif; background: var(--bg); color: var(--text);
-}
-header {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: white; padding: 24px 18px;
-}
-header h1 { margin: 0 0 8px; font-size: 28px; }
-header p { margin: 0; opacity: 0.95; line-height: 1.5; }
-.container {
-  max-width: 1100px; margin: 0 auto; padding: 20px;
-}
-.toolbar {
-  display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 18px;
-}
-button, .linkbtn {
-  border: none; border-radius: 10px; padding: 10px 14px; cursor: pointer;
-  background: white; color: var(--text); border: 1px solid var(--border);
-  text-decoration: none; font-size: 14px;
-}
-button.active {
-  background: var(--primary); color: white; border-color: var(--primary);
-}
-.grid {
-  display: grid; gap: 16px;
-}
-.card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
-}
-.meta {
-  font-size: 13px; color: var(--muted); margin-bottom: 8px;
-}
-.question {
-  font-weight: 700; margin: 10px 0 14px; font-size: 18px;
-}
-.options {
-  display: grid; gap: 10px; margin: 12px 0;
-}
-.option {
-  padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: #fafafa;
-}
-.option input { margin-right: 8px; }
-.actions {
-  display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px;
-}
-.result {
-  margin-top: 12px; font-weight: 700;
-}
-.result.ok { color: var(--ok); }
-.result.bad { color: var(--bad); }
-.answer-box, .transcript {
-  margin-top: 12px; padding: 14px; border-radius: 12px; background: #f8fafc; border: 1px solid var(--border);
-  line-height: 1.6;
-}
-.hidden { display: none; }
-.badge {
-  display: inline-block; background: var(--primary-soft); color: var(--primary); border-radius: 999px;
-  padding: 5px 10px; font-size: 12px; font-weight: 700; margin-bottom: 10px;
-}
-.score {
-  margin: 0 0 16px; padding: 14px 16px; background: #ecfeff; border: 1px solid #a5f3fc; border-radius: 12px;
-}
-.small { font-size: 13px; color: var(--muted); }
-.matching-item {
-  padding: 12px; border: 1px solid var(--border); border-radius: 12px; margin-top: 10px; background: #fafafa;
-}
-select {
-  padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border);
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;padding:24px 16px}
+.wrap{max-width:1150px;margin:0 auto;padding:18px}
+h1{margin:0 0 8px} h2,h3{margin:0 0 12px}
+.topnote{opacity:.95;line-height:1.5}
+.tabs,.subtabs{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 16px}
+button{padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:#fff;cursor:pointer}
+button.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 8px 24px rgba(0,0,0,.05)}
+.q{font-weight:700;margin:10px 0 12px}
+.opt{display:block;padding:10px 12px;border:1px solid var(--border);border-radius:12px;margin:8px 0;background:#fafafa}
+.small{font-size:13px;color:var(--muted)}
+.result{margin-top:10px;font-weight:700}
+.ok{color:var(--ok)} .bad{color:var(--bad)}
+.hidden{display:none}
+.box{background:var(--soft);border:1px solid var(--border);border-radius:12px;padding:12px;margin-top:10px;line-height:1.6;white-space:pre-wrap}
+.score{background:#ecfeff;border:1px solid #a5f3fc;padding:12px 14px;border-radius:12px;margin-bottom:16px}
+.section-title{display:inline-block;background:#dbeafe;color:var(--blue);padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width: 800px){ .grid2{grid-template-columns:1fr} }
+select{padding:10px;border-radius:10px;border:1px solid var(--border);min-width:120px}
+.starter{padding:10px 12px;background:#eff6ff;border-radius:10px;border:1px solid #bfdbfe;margin-bottom:10px}
 </style>
 </head>
 <body>
 <header>
-  <div class="container">
-    <h1>Web luyện Listening B1</h1>
-    <p>Đã cập nhật dữ liệu listening theo file bạn gửi. Web có 4 phần: Part 1 trắc nghiệm, Part 2 nghe và đọc transcript, Part 3 matching, Part 4 bài nghe dài kèm câu hỏi.</p>
+  <div class="wrap">
+    <h1>Web luyện thi B1</h1>
+    <div class="topnote">Bản full: mỗi file được chia đúng Part 1–5 và có đáp án cho từng part.</div>
   </div>
 </header>
 
-<div class="container">
-  <div class="score" id="scoreBox">Điểm hiện tại: <strong id="score">0</strong> / <span id="total">0</span></div>
-
-  <div class="toolbar">
-    <button class="tab active" data-tab="part1">Part 1</button>
-    <button class="tab" data-tab="part2">Part 2</button>
-    <button class="tab" data-tab="part3">Part 3</button>
-    <button class="tab" data-tab="part4">Part 4</button>
-    <button id="resetBtn">Làm lại toàn bộ</button>
-  </div>
-
-  <div id="content"></div>
+<div class="wrap">
+  <div class="score">Điểm hiện tại: <strong id="score">0</strong></div>
+  <div class="tabs" id="testTabs"></div>
+  <div id="partTabs" class="subtabs"></div>
+  <div id="app"></div>
 </div>
 
 <script>
-const DATA = {"part1": [{"id": 1, "question": "What time do they meet?", "options": {"A": "7.30pm", "B": "6.30pm", "C": "9.30pm"}, "answer": "B", "audio": "https://youtu.be/np45fcsNkUg", "transcript": "Hey Alex, it’s me. Just wanted to remind you about our plan for tonight. We’re meeting at 6:30 PM, so try not to be late! I know you usually finish work around 6, so that should give you enough time to get there. If anything changes, just let me know. Oh, and by the way, Jake might join us a bit later, around 7:30 or so. Alright, see you soon!"}, {"id": 2, "question": "What did she like the most about the movie?", "options": {"A": "the car scenes", "B": "the fight scenes", "C": "the mountain scenes"}, "answer": "C", "audio": "https://youtu.be/DMFu7TyAmEk", "transcript": "I watched the movie last weekend, and overall, I really enjoyed it. There were plenty of exciting moments, especially the fast car scenes at the beginning, which kept me on the edge of my seat. The fight scenes were also quite impressive, with a lot of action and energy. However, what stayed with me the most was the way the film showed the mountains. The wide shots of the snowy peaks and quiet valleys were absolutely beautiful and made the story feel much more powerful. Even days later, those mountain scenes are what I remember most clearly."}, {"id": 3, "question": "What does she do on her holidays?", "options": {"A": "Drawing", "B": "Walking", "C": "Cooking"}, "answer": "B", "audio": "https://youtu.be/g3cm97yFUdw", "transcript": "Holidays are the only time when I can really relax and do things at my own pace. I love being outdoors, so I usually spend a lot of time walking, especially in quiet places like parks, along the coast, or in the countryside. Long walks help me disconnect from work and enjoy the surroundings. Of course, when I have some free time in the evening, I might sit down and do a bit of drawing, and sometimes I even try cooking simple meals, but those aren’t really the main activities I look forward to on my holidays."}, {"id": 4, "question": "What does he want to be?", "options": {"A": "Reporter", "B": "Chef", "C": "Writer"}, "answer": "C", "audio": "https://youtu.be/PlRK_2QQLOw", "transcript": "People often ask me what I want to do in the future, and honestly, it wasn’t always clear to me. For a while, I considered becoming a reporter because I enjoy finding information and talking to different people. I also thought about being a chef, since I love cooking and experimenting with new recipes in my free time. However, writing has always been my true passion. I enjoy expressing ideas through words and creating stories that connect with others. That’s why, in the end, I’ve decided that I want to be a writer, even though I know it won’t be an easy path."}, {"id": 5, "question": "What will she do?", "options": {"A": "Go to the coffee shop", "B": "Go for a drive", "C": "Go on a picnic"}, "answer": "A", "audio": "https://youtu.be/6Geax0ExyK4", "transcript": "My friend Jenny has been feeling a bit tired lately, so she’s been talking about doing something relaxing this weekend. At first, she mentioned going for a drive outside the city, just to clear her head. She also briefly considered having a picnic if the weather was good. However, after thinking it through, she decided she’d rather keep things simple. She plans to go to her favorite coffee shop, sit by the window, and spend some quiet time reading and catching up on messages. Knowing Jenny, that’s exactly what she needs right now."}, {"id": 6, "question": "Where did they meet?", "options": {"A": "The parking lot", "B": "The front entrance", "C": "The school gate"}, "answer": "B", "audio": "https://youtu.be/Awk7AYe9_cw", "transcript": "Hi May, it’s John. I just wanted to remind you that we’re meeting this afternoon to visit the art exhibition by Leonard Hughes at five o’clock. At first, I thought we could meet near the parking lot, or even wait by the school gate, but that area is usually very crowded at this time of day. So in the end, I think it’s best if we meet at the front entrance of Building A, where the exhibition is being held. I’ll be standing right next to the main doors at 4:45. If you’re running late, just give me a call. See you soon!"}, {"id": 7, "question": "What country will they study next semester?", "options": {"A": "France", "B": "Italy", "C": "Germany"}, "answer": "A", "audio": "https://youtu.be/kPr53Tcv75w", "transcript": "Good morning, everyone. Before we finish today, I’d like to give you a quick overview of what we’ll be studying next semester. Some of you may remember that last year we focused on Germany, and before that, we spent quite a lot of time discussing Italian history and culture. However, next term, our main topic will be France. We’ll look at key historical events, social changes, and how the country influenced Europe as a whole. I believe this will be a particularly impressive subject, and I’m sure many of you will find it both challenging and enjoyable."}, {"id": 8, "question": "Which room will they study in?", "options": {"A": "Room 201", "B": "Room 301", "C": "Room 302"}, "answer": "B", "audio": "https://youtu.be/iZAFLEJOlqk", "transcript": "Hello everyone, this is your chemistry teacher. I’m calling to give you a quick update about our practical class this Friday. We will still meet at two o’clock as planned. Originally, the session was scheduled to take place in Room 201, and some of you may also have heard about using Room 302 as an alternative. However, due to an unexpected technical issue, the class will now be held in Room 301 instead. See you then."}, {"id": 9, "question": "How many copies did he sell?", "options": {"A": "Over 300000 copies", "B": "100.000 copies", "C": "30.000 copies"}, "answer": "A", "audio": "9. How many copies did he sell?.mp3", "transcript": "First of all, I’d like to thank all my readers for their incredible support. When my book ‘Echoes of Time’ was first released, we were thrilled to sell around one hundred thousand copies in a very short time. At that point, I already felt extremely grateful. However, the success didn’t stop there. Since then, sales have continued to grow, and so far, more than three hundred thousand copies have been sold. It’s been an amazing journey, and I truly appreciate everyone who has supported my work."}, {"id": 10, "question": "Who did she take the picture of?", "options": {"A": "The girl's team", "B": "The boy’s team", "C": "Anna, Sara and the girl's team"}, "answer": "A", "audio": "https://youtu.be/BR8RO-N1kBc", "transcript": "Last weekend, I went to watch a sports match with some friends. At first, I thought about taking a picture of the boys’ team because they were playing really well. Anna and Sara were standing nearby, and they even suggested that I include them in the photo. However, in the end, I took a picture of the girls’ team—the team I play for. We had worked hard all season, and I wanted to capture that moment."}, {"id": 11, "question": "Where do they go when they travel to India?", "options": {"A": "Go to the park", "B": "Go to famous places", "C": "Go out to eat"}, "answer": "A", "audio": "https://youtu.be/pJSXZFxDwQs", "transcript": "I’ve traveled to India several times, and people often assume that I spend most of my time visiting famous landmarks or going out to eat local food. Of course, I do enjoy trying Indian dishes, and I’ve seen some well-known places too. However, what I really like to do when I’m there is go to the park. I enjoy walking through public parks, watching people relax, and experiencing everyday life. That’s usually where I spend most of my time when I travel to India."}, {"id": 12, "question": "Which door do they need to take to get to Edinburgh?", "options": {"A": "Two", "B": "Three", "C": "Four"}, "answer": "A", "audio": "https://youtu.be/suMEeSNVKP8", "transcript": "Attention, please. The train is now preparing to depart, so passengers are advised to move quickly to their boarding doors. Passengers travelling to Edinburgh should proceed through door number two. Door three will be used for passengers going to Glasgow, and door four is reserved for local trains only. Please ensure you are at the correct door before boarding begins."}, {"id": 13, "question": "How long does it take to get to the station?", "options": {"A": "15 minutes", "B": "20 minutes", "C": "25 minutes"}, "answer": "B", "audio": "https://youtu.be/3yc-Hb0oY_U", "transcript": "Attention please, passengers travelling to the city centre. Your train will arrive at Riverside Station in approximately twenty minutes. After arriving at the station, you will need to continue your journey for another fifteen minutes to reach your final destination in the city centre. Please remain seated and listen for further announcements."}, {"id": 14, "question": "What time is the meeting?", "options": {"A": "2pm", "B": "10am", "C": "11am"}, "answer": "A", "audio": "https://youtu.be/Lv9TL2PkBeY", "transcript": "This is a reminder of Mr. Thompson’s schedule. Today, he will leave for the airport at 10 a.m., and at 11 a.m. he is scheduled to complete the check-in process for his flight to Ho Chi Minh City. Please note that tomorrow afternoon at 2 p.m., he has an important meeting with a business partner. All necessary documents should be prepared in advance."}, {"id": 15, "question": "What did she do last weekend?", "options": {"A": "Stayed at home", "B": "Went shopping", "C": "Went to the cinema"}, "answer": "A", "audio": "https://youtu.be/Ixb0keKKQ64", "transcript": "Last weekend was much quieter than usual for me. I had actually planned to go shopping on Saturday and even thought about watching a movie at the cinema in the evening. However, after a long and tiring week at work, I decided to cancel those plans. Instead, I stayed at home, caught up on some rest, and spent time reading and cooking. It wasn’t very exciting, but it was exactly what I needed."}, {"id": 16, "question": "What are the similarities between his mom and aunt?", "options": {"A": "They were thin", "B": "They have the same eye color", "C": "They have the same hair color"}, "answer": "A", "audio": "https://youtu.be/lF4z-GB2UVg", "transcript": "My mom and my aunt Ann grew up together and were very close when they were younger. Although they look quite different now, there were some similarities between them in the past. My mom has brown eyes, while Aunt Ann’s eyes are blue, so that’s one clear difference. Their hair color was also never the same—my mom always had dark hair, but Aunt Ann preferred lighter shades. However, both of them were very slim when they were young, especially during their college years. People often noticed how thin they both were, even though their styles and personalities were quite different."}], "part2": [{"id": "P2-14A", "topic": "A place for studying", "speaker": "On public transport", "audio": "P2-14.1. On public transport.mp3", "transcript": "The distance from my house to school is 20 km, and it usually takes me an hour to get there. So, when I'm on the train, I use the time to do homework and review the lessons for the day. Some people say that studying like this can be distracting, but I find it very effective for me."}, {"id": "P2-14B", "topic": "A place for studying", "speaker": "At home", "audio": "P2_14.2. At home .mp3", "transcript": "I don't like studying in very crowded places because I can't focus well. I usually sit on the sofa in the living room to study. My parents often travel for work, so my house is very quiet."}, {"id": "P2-14C", "topic": "A place for studying", "speaker": "In the coffee shop", "audio": "P2_14.3. In the coffee shop .mp3", "transcript": "I don't like studying in very quiet places such as at home or in the library because I get sleepy easily and might even fall asleep while studying. There's a coffee shop near my house, and I often go there to study because the presence of other people makes me feel more motivated. I find that I achieve higher productivity and efficiency in my studies when I'm there."}, {"id": "P2-14D", "topic": "A place for studying", "speaker": "In the park", "audio": "P2_14.4. In the park .mp3", "transcript": "I notice that most people prefer doing their homework in the classroom, but for me, those chairs are way too hard and leave me sore all day. I prefer sitting under the trees in the park to study—it's cool, and the air is fresh. There's a famous coffee shop across from where I sit, and they serve really good coffee."}], "part3": [{"id": 15, "topic": "Arts", "audio": "P3_15. Topic: Arts..wav", "dialogue": ["M: What magazine are you reading?", "W: I'm reading about art.", "M: That sounds interesting. I think art is only for the wealthy. Poor people don’t have the opportunity or time to enjoy art.", "W: Actually, art isn’t limited to any one group. If we have an interest, we can access art because it’s all around us.", "M: I wish that when I was a child and in school, I had more exposure to the arts. I'm really glad that now, when my child goes to school, they can have more exposure to the arts.", "W: Yes, that's great news. I hope that the authorities and the government will invest more in the arts and make them accessible to everyone, especially by adding more art classes in schools so that students can be exposed to art early on.", "M: I agree. Children should be introduced to the arts early so they can develop their own sense of beauty sooner.", "W: I think with the development of technology, where we just scroll a bit and see art videos and images flooding social media, art is becoming more accessible than ever.", "M: Really? Let's wait and see how it unfolds."], "matching": [{"statement": "Art is only suitable for the privileged few", "answer": "M"}, {"statement": "The government should invest more in arts", "answer": "W"}, {"statement": "Children should be exposed to art early", "answer": "B"}, {"statement": "In the future, art will become more accessible", "answer": "W"}]}], "part4": [{"id": "4A", "topic": "television series", "audio": "P4_16. Topic: television series .wav", "transcript": "In recent years, television series have become one of the most popular forms of entertainment worldwide. Unlike standalone films, series allow stories and characters to develop gradually over time, which helps maintain audience interest across multiple episodes and seasons. One key factor behind the success of many television series is their ability to maintain a consistent standard. Viewers tend to remain loyal to a series when the storytelling, acting, and production quality remain strong from the beginning to the end, rather than fluctuating between episodes. Another important aspect to consider is how audience behaviour has changed. With the rise of streaming platforms, viewers now watch episodes in different ways, such as binge-watching entire seasons in a short period of time. As a result, producers and writers are adapting their approach to structure, pacing, and episode length. This clearly demonstrates that modern viewing patterns are not only affecting how audiences consume content, but are also shaping how television series are planned, written, and produced today.", "questions": [{"question": "What does the speaker say is one major strength of successful television series?", "options": {"A": "They focus mainly on famous actors.", "B": "It has the consistent quality throughout.", "C": "They are usually shorter than films."}, "answer": "B"}, {"question": "What does the speaker suggest about changes in television production?", "options": {"A": "Streaming platforms have reduced production costs.", "B": "Television series are becoming less creative.", "C": "Viewer habits influence the way that series are made."}, "answer": "C"}]}, {"id": "4B", "topic": "making plans", "audio": "P4_16. Topic: making plans.wav", "transcript": "In my experience, planning is something people often misunderstand. Many assume that having a plan means you lose flexibility, but I’ve found the opposite to be true. When I take the time to plan ahead, it becomes much easier to choose between different options instead of reacting at the last minute. Planning forces you to think about priorities. Once you know what really matters, decision-making becomes clearer and less stressful. Rather than feeling restricted, you gain confidence because you understand why you are choosing one path over another. That said, planning does come with certain challenges. You can’t plan effectively without accepting limitations. Whether it’s time, energy, or resources, you have to be honest with yourself and set boundaries. This can be uncomfortable, but it’s necessary. Ultimately, I believe planning works best when people recognise both its benefits and its limits. It’s not about controlling everything, but about making thoughtful choices within realistic constraints.", "questions": [{"question": "What does the speaker say is a key benefit of making plans?", "options": {"A": "They make life more predictable.", "B": "They help you make decisions.", "C": "They reduce the need for communication."}, "answer": "B"}, {"question": "What does the speaker mention as a difficulty when planning?", "options": {"A": "It discourages people from taking risks.", "B": "It requires you to set yourself certain limits.", "C": "It only works in professional situations."}, "answer": "B"}]}, {"id": "4C", "topic": "a book about a life of a scientist", "audio": "P4_16. Topic: a book about a life of a scientist.wav", "transcript": "The book offers an overview of the scientist’s life, combining personal experiences with explanations of major discoveries. Rather than overwhelming readers with technical detail, the author makes a clear effort to present difficult concepts in an accessible way, ensuring that non-specialist readers can follow the scientific ideas being discussed. For those familiar with earlier biographies of this scientist, much of the material will feel familiar. The structure and content closely reflect themes already explored in a previous publication, although this version places slightly more emphasis on storytelling than analysis. Overall, while the book may not introduce many new facts, it succeeds in presenting the scientist’s life and work in a clear and approachable manner.", "questions": [{"question": "What does the reviewer say about the style of the book?", "options": {"A": "It uses simple language to describe complex ideas", "B": "It focuses mainly on scientific data.", "C": "It is written mainly for academic readers."}, "answer": "A"}, {"question": "What does the reviewer say about the book compared to others?", "options": {"A": "It presents completely new information.", "B": "It is more detailed than earlier biographies.", "C": "It is similar to the previous book about the scientist"}, "answer": "C"}]}, {"id": "4D", "topic": "criticism of the new novel", "audio": "P4_17. Topic: criticism of the new novel .wav", "transcript": "The novel has attracted a great deal of attention since its release, and opinions among readers have been mixed. While some critics have pointed out weaknesses in the pacing of the story, I believe there are several strengths worth mentioning. In particular, the author has created characters that feel realistic and engaging. Their personalities are well developed, making it easy for readers to become emotionally invested in their experiences, even when the plot itself slows down. Although this book may not be flawless, it represents an important step in the writer’s career. Given the level of public interest and discussion surrounding its release, I expect it to significantly increase the author’s recognition and readership. Overall, despite certain criticisms, this novel is likely to play a key role in shaping how the author is perceived in the literary world.", "questions": [{"question": "What did the reviewer think was a positive aspect of the novel?", "options": {"A": "The writing style was highly original.", "B": "The characters were interesting.", "C": "The storyline was unpredictable."}, "answer": "B"}, {"question": "What does the reviewer suggest about the impact of the novel?", "options": {"A": "It may divide readers’ opinions.", "B": "It will establish the author's popularity.", "C": "It will mainly appeal to academic audiences."}, "answer": "B"}]}, {"id": "4E", "topic": "A break from studying", "audio": "P4_17. Topic: A break from studying.wav", "transcript": "After finishing secondary school, I decided not to apply to university immediately. At the time, many of my friends were eager to continue their studies, but I felt unsure about what I wanted to do next and didn’t feel prepared for the demands of higher education. Instead, I took a year off and spent that time working part-time and travelling. Being away from a structured academic environment forced me to make decisions on my own, manage my finances, and take responsibility for my daily life. Looking back, that year was extremely valuable. It gave me time to reflect on my goals and helped me grow personally. By the time I eventually started university, I felt more confident, motivated, and capable of handling independence. Although taking a break isn’t the right choice for everyone, for me it was an important step before continuing my education.", "questions": [{"question": "Why didn’t he go straight to the university?", "options": {"A": "He wanted to earn money before studying.", "B": "His family advised him to wait.", "C": "He wasn’t ready to start higher education"}, "answer": "C"}, {"question": "What did he think he learnt from the year’s break?", "options": {"A": "How to manage academic pressure.", "B": "To be more independent", "C": "The importance of choosing the right degree."}, "answer": "B"}]}]};
-let currentTab = "part1";
+const TESTS = [{"id": "test0", "title": "TEST 0 - MOUNTAIN SUMMITS", "part1": {"type": "mcq_fill", "title": "Part 1: Fill in the blanks", "questions": [{"q": "Take the bus to the main ____.", "options": ["station", "run", "walk"], "answer": "station"}, {"q": "The bus ____ are near my house.", "options": ["color", "stops", "driver"], "answer": "stops"}, {"q": "My house is ____ and you can easily recognize it by the color.", "options": ["tall", "fat", "green"], "answer": "green"}, {"q": "I cook eggs for a quick ____.", "options": ["dinner", "homework", "sore"], "answer": "dinner"}, {"q": "After dinner, we will watch ____ on TV.", "options": ["sing", "movies", "news"], "answer": "movies"}]}, "part2": {"type": "ordering", "title": "Part 2: Arrange the sentences into complete paragraphs", "prompt": "Topic: Films", "starter": "The first film was shown in 1895 in Paris, France.", "items": ["Now things have changed, actors and filmmakers can earn millions of dollars from film production.", "Not only did these technological limitations exist, the movies were also low budget.", "That's because the movies were only in black and white, and sometimes without sound.", "Due to the lack of money, actors also had few opportunities to earn money through acting.", "Old movies were very different from today's movies."], "answer_text": "Old movies were very different from today's movies → That's because the movies were only in black and white, and sometimes without sound → Not only did these technological limitations exist, the movies were also low budget → Due to the lack of money, actors also had few opportunities to earn money through acting → Now things have changed, actors and filmmakers can earn millions of dollars from film production."}, "part3": {"type": "ordering", "title": "Part 3: Arrange the sentences into complete paragraphs", "prompt": "Topic: weekend activities", "starter": "The weather was great last week, there was family sports in town.", "items": ["There were 60 participants, in which Ms. Kamur kept the fastest speed and won.", "It was held on Saturday morning, there was a 10 mile race for adults.", "After she received the prize, the following time was for children's activities.", "After playing, the children were very hungry and ate with their parents.", "Activities included football, swimming, skipping rope, and the children played together very happily."], "answer_text": "It was held on Saturday morning, there was a 10 mile race for adults → There were 60 participants, in which Ms. Kamur kept the fastest speed and won → After she received the prize, the following time was for children's activities → Activities included football, swimming, skipping rope, and the children played together very happily → After playing, the children were very hungry and ate with their parents."}, "part4": {"type": "matching_people", "title": "Part 4: Choose the answer according to each person's opinion", "prompt": "Topic: childhood", "questions": [{"q": "Who likes to play with children?", "answer": "A"}, {"q": "Who likes to play with small friends?", "answer": "B"}, {"q": "Who looked forward to going out to play?", "answer": "D"}, {"q": "Who liked arts when he was a child?", "answer": "D"}, {"q": "Who likes modern games when growing up?", "answer": "C"}, {"q": "Who finds the games nowadays much more difficult?", "answer": "A"}, {"q": "Who liked reading books when he was a child?", "answer": "C"}], "people": {"A": "In the past, I really liked playing board games, now to limit the children from using computers, I often spend time playing with them, but I have struggled with them, the games nowadays have more characters and rules, making us think a lot every time we play, but my children and I still like it and have a good time and laugh together.", "B": "When I was a child, I often played soccer with other children of the same age, we often played football in the school yard and sometimes in the open spaces of the neighborhood. We divided into small teams and chased the ball until we were all tired.", "C": "When I was a child, I didn't like going out to play, so I chose reading books as a form of entertainment. The stories described in the pages of books helped me discover my own world. Later, when I grow up, I like playing modern games with eye-catching interfaces, which helps me relax and increase my creativity.", "D": "When I was a child, I really liked playing outdoor activities. I remember on bad weather days, I was always by the window, glued to the window to look outside, praying for the rain to stop. At those times, my mother often gave me paper and a box of crayons, I really liked that drawing activity and often drew at home when the weather was not good."}}, "part5": {"type": "matching_headings", "title": "Part 5: Matching headings", "prompt": "Topic: Mountain Summits", "headings": ["Publicising one’s achievements", "A more intimate relationship", "Changing the perspective towards mountain", "The wrong priority", "A disturbing revelation", "Unique sense of achievement", "A focus on sustainability"], "paragraphs": [{"label": "A", "text": "The term 'mountain' has evolved over time, reflecting not only physical characteristics but also cultural significance. Before the 19th century, people were quite shy when it came to conquering mountains. Today, with the development of technology, reaching the highest peaks has become easier. In contemporary discussions, mountains may symbolize challenges to overcome or destinations for adventure, transcending their geographical attributes.", "answer": "Changing the perspective towards mountain"}, {"label": "B", "text": "Climbing a mountain often leads to a profound sense of accomplishment. It represents not just reaching a physical summit but also conquering personal fears and pushing one's limits, creating memories that last a lifetime. Besides, mountain climbing also creates adrenaline — a hormone that creates a feeling of excitement like when playing other extreme sports.", "answer": "Unique sense of achievement"}, {"label": "C", "text": "In today's digital age, sharing achievements has become prevalent. Climbing a mountain is frequently documented on social media, turning personal milestones into public spectacles that inspire others while also raising questions about authenticity.", "answer": "Publicising one’s achievements"}, {"label": "D", "text": "In recent years, some climbers have become more focused on taking photos for social media than respecting the mountains they visit. Long lines form near popular summits as people wait for the perfect picture, often ignoring weather warnings or safety advice. In some cases, this obsession with online fame has led to serious accidents. It shows how personal image is sometimes valued more than safety or responsibility.", "answer": "The wrong priority"}, {"label": "E", "text": "Mount Everest, once a symbol of human courage, has now become a worrying example of how adventure can harm nature. Every climbing season, long lines of climbers crowd the narrow paths to the summit, leaving behind waste and pollution on the fragile slopes. What used to be a personal challenge has turned into a commercial race, where success is measured by photos and fame rather than respect for the mountain. This situation is disturbing because it shows how our desire to conquer the world’s highest peak has created serious environmental and moral concerns.", "answer": "A disturbing revelation"}, {"label": "F", "text": "As the number of climbers on Mount Everest continues to rise, the need to focus on sustainability has become urgent. Local authorities and environmental groups are now introducing stricter waste management rules, encouraging climbers to bring back what they carry, and limiting the number of expeditions each season. Some teams have even started clean-up climbs to remove rubbish left behind on the slopes. These efforts remind us that protecting the mountain is just as important as reaching its peak. True success on Everest should mean leaving the mountain cleaner and safer for future generations.", "answer": "A focus on sustainability"}, {"label": "G", "text": "Shared experiences in challenging environments, like mountains, can deepen intimacy in relationships. Couples or friends who navigate the challenges of climbing together often find their bonds strengthened through mutual support and understanding.", "answer": "A more intimate relationship"}]}}, {"id": "test1", "title": "TEST 1 - EARLY AUSTRALIA", "part1": {"type": "mcq_fill", "title": "Part 1: Fill in the blanks", "questions": [{"q": "I saw some shoes in the ____ of one store.", "options": ["market", "window", "shoe"], "answer": "window"}, {"q": "I didn't ____ it.", "options": ["eat", "drink", "buy"], "answer": "buy"}, {"q": "I buy some food at the ____.", "options": ["classroom", "park", "market"], "answer": "market"}, {"q": "I ate ____.", "options": ["watch", "door", "cake"], "answer": "cake"}, {"q": "I ____ a program on TV.", "options": ["ate", "saw", "watched"], "answer": "watched"}]}, "part2": {"type": "ordering", "title": "Part 2: Arrange the sentences into complete paragraphs", "prompt": "Topic: Homework next week", "starter": "Our homework next week will be about places in town.", "items": ["This comparison will help you find common points between countries.", "You may not find all the above information but you will find places with similarities.", "Before writing, we need to find out some information about the place.", "That information can revolve around the aspects: people, culture and history.", "When collecting information about the above 3 aspects, you can compare with places in your country."], "answer_text": "Before writing, we need to find out some information about the place → That information can revolve around the aspects: people, culture and history → You may not find all the above information but you will find places with similarities → When collecting information about the above 3 aspects, you can compare with places in your country → This comparison will help you find common points between countries."}, "part3": {"type": "ordering", "title": "Part 3: Arrange the sentences into complete paragraphs", "prompt": "Topic: Travel", "starter": "In the early 1800s, traveling is quite difficult.", "items": ["Thanks to the invention of cars and trains, it became easier for people to travel.", "At that time, only the very wealthy could afford to travel.", "Thanks to the great development of means of transport, today people can travel to other parts of the world.", "Because flying is very fast, people can travel by this means to different locations for business or travel.", "Not only the above 2 means of transport, people later had the opportunity to travel by aeroplanes."], "answer_text": "At that time, only the very wealthy could afford to travel → Thanks to the invention of cars and trains, it became easier for people to travel → Not only the above 2 means of transport, people later had the opportunity to travel by aeroplanes → Because flying is very fast, people can travel by this means to different locations for business or travel → Thanks to the great development of means of transport, today people can travel to other parts of the world."}, "part4": {"type": "matching_people", "title": "Part 4: Choose the answer according to each person's opinion", "prompt": "Topic: extreme sports", "questions": [{"q": "Who still likes extreme sports after playing once?", "answer": "B"}, {"q": "Who enjoys nature?", "answer": "C"}, {"q": "Who finds extreme sports unimportant?", "answer": "D"}, {"q": "Who finds training before participating is important?", "answer": "A"}, {"q": "Who wants to play more extreme sports?", "answer": "C"}, {"q": "Who likes traditional sports like swimming?", "answer": "B"}, {"q": "Who always avoid playing extreme sports?", "answer": "D"}], "people": {"A": "Before trying any extreme sport, I believe it’s absolutely essential to train properly. These kinds of activities are exciting, but they can also be dangerous if you don’t know what you’re doing. I’ve seen people get hurt because they didn’t prepare well. That’s why I always make sure to take a training course and understand the safety rules before I try anything new. With the right preparation, I think extreme sports can be a great experience.", "B": "I’ve always been more into traditional sports like swimming, running, or playing tennis. They’re fun and easy to do regularly. But a few months ago, I went bungee jumping during a holiday, and it was an incredible experience. I didn’t expect to enjoy it so much! I still prefer regular sports for everyday fitness, but now I’m definitely more open to trying extreme sports once in a while for the adventure.", "C": "What I love most about extreme sports is how they let me enjoy nature in a different way. Activities like rock climbing or mountain biking allow me to explore amazing places while challenging myself physically and mentally. It’s a way to disconnect from daily life and feel completely alive. If I had more time and money, I’d love to do these kinds of sports more often, especially in wild, remote areas.", "D": "I know some people find extreme sports exciting, but for me, they’ve never been important. I actually avoid them as much as possible. I don’t like the idea of putting myself in danger just for fun. There are plenty of safer ways to stay active and enjoy life. I’d rather go for a walk or do yoga than jump out of a plane or climb a mountain. It’s just not my thing."}}, "part5": {"type": "matching_headings", "title": "Part 5: Matching headings", "prompt": "Topic: Early Australia", "headings": ["A Journey made by stages", "A new evidence that leads to speculation", "An alternative history of settlement", "Lack of knowledge and skills", "Determination of the explorers through the ages", "Natural barrier to resettlement", "Technology helps uncover the ocean’s secret"], "paragraphs": [{"label": "A", "text": "Scientists have found evidence that humans have lived in Australia for about 65,000 years. This is different from the previous thinking that the first people only arrived in Australia a few tens of thousands of years ago. The results from the analysis of archaeological relics have given rise to many different opinions about the origin of the first people in Australia. This discovery shows that the Australian aborigines have been present and lived here for a long time.", "answer": "An alternative history of settlement"}, {"label": "B", "text": "Humans coming to Australia did not happen only once. In addition to the first group of people, scientists have also discovered traces of two other groups that also came here. This shows that many groups of people came to Australia in the past. However, in ancient times, it was very difficult to get to Australia because they had to cross a large ocean without modern technology like today.", "answer": "Natural barrier to resettlement"}, {"label": "C", "text": "Thanks to modern machinery, scientists have discovered a chain of small islands that form a route to Australia. Technology such as remote sensing and electronic maps helps them identify the islands and the movements of ancient people. Thanks to that, they have a better understanding of the path that their ancestors may have taken to reach Australia.", "answer": "Technology helps uncover the ocean’s secret"}, {"label": "D", "text": "Ancient people may have reached Australia by passing through many small islands. Each island was a place where they stopped to rest and find food, then continued their journey. This way of moving shows that they knew how to adapt to difficult conditions to be able to live in Australia.", "answer": "A Journey made by stages"}, {"label": "E", "text": "Currently, researchers cannot know for sure how many people participated in the journey to Australia. It could have been only a few dozen people, or it could have been up to thousands. Due to the lack of clear evidence, it is difficult to determine the exact number. However, future research may help find the answer.", "answer": "A new evidence that leads to speculation"}, {"label": "F", "text": "Some people think that ancient people were not smart enough or skilled enough to cross the sea to Australia. They think that without modern tools, ancient people could not navigate or cross the ocean. But history has proven that humans have always been smart and can overcome many difficulties.", "answer": "Lack of knowledge and skills"}, {"label": "G", "text": "From ancient times to the present, humans have always wanted to explore new places. Whether it was going to sea in ancient times or going to space today, we always find ways to overcome the limits. Ancient people may have crossed the sea because they wanted to find a better place to live. Thanks to their courage, we understand more about human history.", "answer": "Determination of the explorers through the ages"}]}}, {"id": "test2", "title": "TEST 2 - THE ARRIVAL OF THE FOUR-DAY WORK WEEK", "part1": {"type": "mcq_fill", "title": "Part 1: Fill in the blanks", "questions": [{"q": "I get up early in the ____ and I go running.", "options": ["morning", "sun", "market"], "answer": "morning"}, {"q": "My ____ come and exercise with me.", "options": ["friends", "dogs", "schools"], "answer": "friends"}, {"q": "I ____ my car at home and go for a walk.", "options": ["burn", "leave", "sell"], "answer": "leave"}, {"q": "Exercise is ____ for my body.", "options": ["always", "dark", "good"], "answer": "good"}, {"q": "I usually drink a lot of water and eat healthy ____.", "options": ["food", "water", "sport"], "answer": "food"}]}, "part2": {"type": "ordering", "title": "Part 2: Arrange the sentences into complete paragraphs", "prompt": "Topic: music festivals", "starter": "Last Saturday, a live music show was held in town park.", "items": ["Because it was free, more than 5,000 people attended.", "The staff were very busy but still closed the shop early to watch the singer.", "The local government planned, funded and paid for everything.", "The singer performed for 2 hours, everyone had great fun.", "People came early and sat in nearby shops waiting for the start time."], "answer_text": "The local government planned, funded and paid for everything → Because it was free, more than 5,000 people attended → People came early and sat in nearby shops waiting for the start time → The staff were very busy but still closed the shop early to watch the singer → The singer performed for 2 hours, everyone had great fun."}, "part3": {"type": "ordering", "title": "Part 3: Arrange the sentences into complete paragraphs", "prompt": "Topic: end of term project", "starter": "This semester we have studied several chapters about local history in the class.", "items": ["After this time, other students will have questions for you and you have to answer them.", "It will have relevant pictures, and your own writing on the topic.", "This talk will point out the key points, and should last about 5 minutes in total.", "The end of term project will focus on at least two of these.", "You will then need to use these pictures and written work to create a presentation for the class."], "answer_text": "The end of term project will focus on at least two of these → It will have relevant pictures, and your own writing on the topic → You will then need to use these pictures and written work to create a presentation for the class → This talk will point out the key points, and should last about 5 minutes in total → After this time, other students will have questions for you and you have to answer them."}, "part4": {"type": "matching_people", "title": "Part 4: Choose the answer according to each person's opinion", "prompt": "Topic: Careers", "questions": [{"q": "Who does not want to change to another job?", "answer": "B"}, {"q": "Who thinks their training is too long?", "answer": "C"}, {"q": "Who enjoys working while training?", "answer": "B"}, {"q": "Who enjoys working in a flexible working environment?", "answer": "D"}, {"q": "Who thinks it was difficult to get the first job?", "answer": "D"}, {"q": "Who thinks they got benefits from working for free?", "answer": "A"}, {"q": "Who likes doing things with their hands?", "answer": "C"}], "people": {"A": "When I was a student, I decided to do an unpaid internship at organizations and companies. At first, my friends said it was a waste of time because I didn’t earn any money. However, I learned a lot of practical skills and gained real working experience. I also built good relationships with my colleagues, which later helped me find a full-time job more easily.", "B": "My dream job is becoming a teacher, and I have never thought about changing to another career. Teaching has always been my goal because I enjoy working with students and helping them learn new things. At the moment, I am studying hard to become a good teacher in the future. While I am still in training, I also work part-time at a school so that I can gain real teaching experience. I really enjoy working while studying because it helps me improve my skills and become more confident in the classroom. Even though it can be challenging sometimes, I believe this experience is very valuable, and I am happy to continue on this career path without changing my job plans.", "C": "Last summer I worked with a plumber and helped her with fixing things. I love a career in mechanical engineering because I enjoy making and repairing things by hand. However, the training period was much longer than I expected, about 2 years. Sometimes I felt tired of studying theory for so many years before actually starting work. Still, I believe the skills I learned will be useful in the long run.", "D": "After graduating, it took me a long time to find my first job. Many companies required experience, which made the process quite stressful. Luckily, I finally found a position that suits me well in a gaming company. I now work in a flexible working environment where I can manage my own time and work from home, and this helps me balance my work and personal life better."}}, "part5": {"type": "matching_headings", "title": "Part 5: Matching headings", "prompt": "Topic: The Arrival of the Four-Day Work Week", "headings": ["A way of life now out of date", "Alternative solutions worth considering", "Undesirable financial consequences", "Benefits for employees", "Unforeseen challenges for employees", "Difficult to change old habits", "Unfair for employees"], "paragraphs": [{"label": "A", "text": "For many decades, working five or even six days a week was seen as the norm. About 100 years ago, Henry Ford proposed giving workers Saturday and Sunday off with full pay. However, with modern technology, changing values, and a greater focus on work-life balance, that lifestyle is becoming less relevant. Employees and companies alike are beginning to question whether spending most of one’s week at work is still necessary or productive.", "answer": "A way of life now out of date"}, {"label": "B", "text": "Supporters of the four-day workweek argue that this model brings many obvious benefits to employees. They feel more satisfied with their jobs, more relaxed and more motivated to contribute. Having an extra day off helps them balance work and personal life, giving them the opportunity to care for their family, relax or pursue personal interests. This not only improves mental health but also contributes to increased productivity when they return to work.", "answer": "Benefits for employees"}, {"label": "C", "text": "Despite its positive potential, the adoption of a four-day workweek also comes with its fair share of concerns, particularly financial ones. In Japan in 1988, when several technology firms experimented with shorter work schedules, they reported a slight drop in productivity during the initial months and a noticeable rise in operational expenses. Businesses in the service or retail sectors may struggle to maintain continuous operations with reduced staffing. To compensate, they may have to hire more people, leading to increased costs in salaries, training and management. For smaller companies, this can easily become a major challenge in terms of budgets and ability to maintain operations.", "answer": "Undesirable financial consequences"}, {"label": "D", "text": "A shortened workweek does not always bring a sense of relief. In fact, many employees worry that the workload will be compressed, making the four-day workday more stressful than usual. The compressed schedule can increase psychological and physical pressure, causing work efficiency to decline rather than improve. Concerns that compressing work into shorter hours may be counterproductive to the original goal.", "answer": "Unforeseen challenges for employees"}, {"label": "E", "text": "One of the biggest barriers to changing working patterns is the stability of long-standing habits. The five-day workday structure affects not only office workers but is also closely linked to the education system, public services and many other social activities. From schools, government agencies to shopping or entertainment centers – all are operating on this time frame. Adjusting the entire system like this will not be easy and is likely to face opposition from many sides. In France in 2000, when the government introduced a nationwide reduction of working hours, numerous companies discovered that employees continued to follow their old patterns, such as staying late or taking work home.", "answer": "Difficult to change old habits"}, {"label": "F", "text": "Another issue raised is fairness between labor groups. While office workers may benefit from the new work schedule, professions that require physical presence such as police, fire or emergency services have few options. They cannot simply reduce the working day without ensuring continuity in work. This is also true for teachers, as the number of students and teaching hours does not decrease. This could widen the gap between occupational classes and create divisions in society.", "answer": "Unfair for employees"}, {"label": "G", "text": "Given the potential difficulties, some experts suggest more flexible approaches instead of shortening the work week. Models such as remote working, job sharing or flexible working hours are considered more suitable in some cases. These solutions give employees more control over their time without putting pressure on businesses to change the entire operating structure. Thereby, the goal of work-life balance can still be achieved without creating many barriers.", "answer": "Alternative solutions worth considering"}]}}, {"id": "test3", "title": "TEST 3 - FROZEN LAND", "part1": {"type": "mcq_fill", "title": "Part 1: Fill in the blanks", "questions": [{"q": "Yesterday we went to a ____ village.", "options": ["small", "smart", "harmful"], "answer": "small"}, {"q": "We ____ in a small house in the village.", "options": ["fly", "stay", "swim"], "answer": "stay"}, {"q": "There is a beautiful ____ in the house.", "options": ["mountain", "garden", "ocean"], "answer": "garden"}, {"q": "There are a lot of green ____ in the garden.", "options": ["animals", "rivers", "trees"], "answer": "trees"}, {"q": "Today, we plan to visit ____ buildings in the village.", "options": ["old", "tall", "furious"], "answer": "old"}]}, "part2": {"type": "ordering", "title": "Part 2: Arrange the sentences into complete paragraphs", "prompt": "Topic: College Welcome Day", "starter": "", "items": ["At the end of the talk, you will meet the head of department and teachers.", "It starts at 10am, there is a small presentation in the main hall.", "This meal is on the 2nd floor of the building.", "These staff members give you a guided tour of the building.", "You have to stay with other students until lunch break."], "answer_text": "It starts at 10am, there is a small presentation in the main hall → At the end of the talk, you will meet the head of department and teachers → These staff members give you a guided tour of the building → You have to stay with other students until lunch break → This meal is on the 2nd floor of the building"}, "part3": {"type": "ordering", "title": "Part 3: Arrange the sentences into complete paragraphs", "prompt": "Topic: African American woman in space", "starter": "Mae Jemison’s father is a skilled worker, her mother is a teacher.", "items": ["Some of those include growing plants and animals in a spaceship.", "This was about science, she was later a member of the research team.", "With the support of her parents, she went to university and studied science.", "Being a part of this group, she traveled to space frequently, and conducted many experiments in space.", "Her degree in the subject enabled her to take a training course in the USA."], "answer_text": "With the support of her parents, she went to university and studied science → Her degree in the subject enabled her to take a training course in the USA → This was about science, she was later a member of the research team → Being a part of this group, she traveled to space frequently, and conducted many experiments in space → Some of those include growing plants and animals in a spaceship"}, "part4": {"type": "matching_people", "title": "Part 4: Choose the answer according to each person's opinion", "prompt": "Topic: Volunteering", "questions": [{"q": "Who wants to enhance future career?", "answer": "B"}, {"q": "Who helps support charity work with money?", "answer": "C"}, {"q": "Who thinks it should help local community?", "answer": "A"}, {"q": "Who thinks volunteering helps improve physical health?", "answer": "D"}, {"q": "Who thinks it can improve knowledge about culture?", "answer": "A"}, {"q": "Who thinks it is a way to travel?", "answer": "D"}, {"q": "Who wants to make new friends?", "answer": "B"}], "people": {"A": "Some people enjoy volunteering abroad, but honestly, I feel most people are more interested in travelling. I believe we should use our time more meaningfully. Each town has many people in need. Their situations are difficult, and they don’t have the means to improve their quality of life. They are individuals who have contributed a lot to the country. Sharing stories with them helps us understand the differences between generations. We can also broaden our knowledge about local history, traditions, and culture through their experiences.", "B": "My mother told me to do local volunteering because she is part of that organisation, but I’m not into it. I prefer volunteering abroad because I can develop soft skills – something that will benefit my future career. Also, meeting new people helps me expand my network and create valuable connections I can use later in my professional life.", "C": "I’m too busy and rarely have any free time to do anything, so spending even a few hours volunteering is difficult. I would have to take half a day off work. I see many people in need and they genuinely require some extra financial support. That’s something I can help with because I earn a good salary. Making monthly donations is not a problem for me – it's how I show my support and contribution.", "D": "I believe there are many ways we can show kindness through volunteering. I'm retired now, and I currently help build houses for people in need. I work with a volunteering organisation that already has clear plans in place. Through this work, I’ve had the chance to experience different foreign cultures. We’re often sent to various countries to carry out these projects, so it’s also a great way to travel while doing something meaningful. The job involves manual labour, so we’re able to improve our physical health – something that some people only begin to notice after a while."}}, "part5": {"type": "matching_headings", "title": "Part 5: Matching headings", "prompt": "Topic: Frozen land", "headings": ["First step on the ice", "Less effort needed", "Why is it so cold?", "Where is the end of the Earth?", "Who is in charge?", "Race to the pole", "Hidden geography"], "paragraphs": [{"label": "A", "text": "Although Antarctica is not claimed as a country, several nations have laid territorial claims over parts of the continent. However, under the Antarctic Treaty System signed in 1959, no single country has full ownership. Instead, the region is governed collectively by over 50 countries that have agreed to preserve it for peaceful and scientific purposes. No military activity is allowed, and scientific cooperation is encouraged. This unique model of international governance helps protect the fragile environment of the frozen land and ensures that its resources are not exploited for commercial gain.", "answer": "Who is in charge?"}, {"label": "B", "text": "The first known landing on Antarctica took place in the early 19th century when a group of seal hunters unintentionally arrived at the icy coastline. Later, exploratory missions were organized specifically to set foot on the continent. In 1895, a Norwegian expedition became the first officially recognized landing. These early steps were dangerous and uncertain, with little knowledge of the terrain or weather. Still, the achievement marked a turning point in human exploration, showing that even the most remote and inhospitable places on Earth could be reached with courage and persistence.", "answer": "First step on the ice"}, {"label": "C", "text": "Antarctica has often been described as the end of the Earth. Located at the southernmost point of the planet, it remains one of the most mysterious and least accessible places for humans. It’s surrounded by the Southern Ocean and sits opposite the Arctic in the global geography. For centuries, explorers speculated whether such a place existed at all. Today, while satellite images and scientific missions provide more data, the continent still retains an aura of the unknown, attracting adventurers and scientists who want to experience the planet’s final frontier.", "answer": "Where is the end of the Earth?"}, {"label": "D", "text": "Despite being covered in thick sheets of ice, Antarctica has a surprisingly diverse and dramatic landscape hidden beneath its surface. Using ground-penetrating radar and satellite imaging, scientists have discovered vast mountain ranges, deep valleys, and even ancient lakes buried under kilometers of ice. These findings suggest that Antarctica was once a very different environment. Studying this hidden geography helps researchers understand the Earth's geological past, as well as how changes in climate may affect the region’s ice coverage in the future.", "answer": "Hidden geography"}, {"label": "E", "text": "The early 20th century saw a dramatic competition between nations to reach the South Pole. Most famously, British explorer Robert Falcon Scott and Norwegian Roald Amundsen led rival expeditions. Amundsen reached the Pole first in 1911, using dog sleds and careful planning. Scott arrived weeks later, only to perish on the return journey with his team. The race to the pole was one of the most extreme tests of human endurance and remains one of the most iconic chapters in the history of polar exploration.", "answer": "Race to the pole"}, {"label": "F", "text": "Travel across Antarctica remains one of the most difficult journeys on Earth. However, modern technology has significantly reduced the physical effort required. In the past, explorers dragged heavy sleds by hand or used animals, often in dangerous and freezing conditions. Today, snowmobiles, tracked vehicles, and even aircraft allow researchers to move equipment and people more easily. While the environment is still harsh, advances in transportation and survival gear make scientific missions more efficient and less life-threatening than those of early explorers.", "answer": "Less effort needed"}, {"label": "G", "text": "Antarctica is the coldest place on Earth, with temperatures regularly dropping below –60°C in winter. The continent’s high altitude, its position near the South Pole, and the fact that sunlight is absent for months all contribute to its extreme chill. Its white ice surface also reflects most of the sun’s heat back into the atmosphere. These unique features make it difficult for heat to accumulate, and as a result, the region remains frozen even in summer. Understanding these conditions helps scientists study global weather patterns and climate change.", "answer": "Why is it so cold?"}]}}, {"id": "test4", "title": "TEST 4 - WOMEN MATHEMATICIANS", "part1": {"type": "mcq_fill", "title": "Part 1: Fill in the blanks", "questions": [{"q": "The water is ____.", "options": ["sour", "clear", "see"], "answer": "clear"}, {"q": "The ____ is out.", "options": ["wind", "dust", "sun"], "answer": "sun"}, {"q": "I have an ____ holiday.", "options": ["tired", "enjoyable", "good"], "answer": "enjoyable"}, {"q": "After ____ so hard.", "options": ["working", "sleeping", "eating"], "answer": "working"}, {"q": "I hope to ____ your letter.", "options": ["tell", "read", "forward"], "answer": "read"}]}, "part2": {"type": "ordering", "title": "Part 2: Arrange the sentences into complete paragraphs", "prompt": "Topic: A new café", "starter": "Yesterday I went to a new opening café named Corner Cafe on High Street.", "items": ["Although it was busy the staff still arranged a table for me.", "I looked at all of those and chose the most expensive sandwich.", "When I was there it was very crowded and the staff were very busy on the first day.", "It tasted quite good with cheese toppings and I will definitely go back to this place.", "They gave me the menu and when I looked at it I saw quite a few dishes."], "answer_text": "When I was there it was very crowded and the staff were very busy on the first day → Although it was busy the staff still arranged a table for me → They gave me the menu and when I looked at it I saw quite a few dishes → I looked at all of those and chose the most expensive sandwich → It tasted quite good with cheese toppings and I will definitely go back to this place."}, "part3": {"type": "ordering", "title": "Part 3: Arrange the sentences into complete paragraphs", "prompt": "Topic: Famous singer", "starter": "Jaden Nobelton is only 18 years old and he is a famous singer.", "items": ["Many people follow him on social media and he becomes a famous singer.", "Before becoming famous at his age, he studied art and music in high school.", "During his studies, he studied creativity and singing on stage.", "In these performances, he often wears bright clothes and paints his face.", "The uniqueness in his way of dressing and his songs makes him attract attention."], "answer_text": "Before becoming famous at his age, he studied art and music in high school → During his studies, he studied creativity and singing on stage → In these performances, he often wears bright clothes and paints his face → The uniqueness in his way of dressing and his songs makes him attract attention → Many people follow him on social media and he becomes a famous singer."}, "part4": {"type": "matching_people", "title": "Part 4: Choose the answer according to each person's opinion", "prompt": "Topic: Music Festival", "questions": [{"q": "Who disappointed with the festival?", "answer": "B"}, {"q": "Who didn’t like the venue?", "answer": "D"}, {"q": "Who found the ticket prices expensive?", "answer": "C"}, {"q": "Who enjoyed the last day?", "answer": "A"}, {"q": "Who liked to meet old friends?", "answer": "D"}, {"q": "Who disliked the bad weather?", "answer": "A"}, {"q": "Who enjoyed the music at the event?", "answer": "C"}], "people": {"A": "This was my first time attending the Music Festival, and to be honest, the weather really didn’t cooperate. It rained heavily on the first two days, which made it difficult to enjoy the outdoor activities. I still got wet in the tent. But I didn’t let that ruin the experience. On the final day, the skies cleared up and the performances were truly amazing — especially the final act in the evening. That last day made it all worthwhile, and I left with some great memories despite the poor weather.", "B": "I’ve been to this festival a couple of times in the past, the quality was good the last times I came, but this time is completely different. The sound quality wasn’t great, and the whole event just felt disorganised. There weren’t enough facilities, and the staff didn’t seem prepared to handle the crowd. I couldn’t even interact with the band. I don’t think I’ll be coming back next year. It’s simply not worth the money or the time anymore.", "C": "I really enjoyed the music of this festival and I danced to the music, I felt every second of the festival was worth it. I absolutely loved the energy of the performances, and the music was spot on throughout the weekend. However, I have to say the ticket prices were far too high, especially for students. I paid almost double what I did two years ago, and although I enjoyed the music, I’m not sure it offered good value for money. If they don’t lower the prices next year, a lot of people might skip it.", "D": "We were playing in a band and we finished our performance in the morning. However, I stayed at the festival to meet up with some old band mates. We talked a lot. However, I didn’t like the venue. It was too crowded and not well organised. The road to the tent village was also congested. I think they should choose a better location next year."}}, "part5": {"type": "matching_headings", "title": "Part 5: Matching headings", "prompt": "Topic: Women Mathematicians", "headings": ["Acknowledging achievement of a pioneer", "Gender obscure achievements", "Uniformity is not always an advantage", "A long career showing exceptional ability", "Labels can change perspective on people", "Man unfairly credited", "Attempting to create a gender balance"], "paragraphs": [{"label": "1", "text": "In 2014, Iranian mathematician Maryam Mirzakhani received the prestigious Fields Prize, the highest honor in mathematics, and the first time in its 70 years that a woman has won it. However, many newspapers at the time emphasised that the prize winner was a woman. For centuries, the achievements of women in mathematics were either omitted from historical records or attributed to male colleagues. Many of their contributions were later credited to male scholars. Such erasure has been a recurring theme in the history of women in this field.", "answer": "Gender obscure achievements"}, {"label": "2", "text": "Maria Agnesi is widely recognised for her important contributions to mathematics. In 1748, she published a major mathematics textbook that was used throughout Europe, becoming the first woman to produce such a comprehensive work in this field. Her book helped explain complex mathematical ideas in a clear and systematic way. Later, in 1750, she was appointed professor of mathematics at a university, making her the first woman to hold this position. These achievements marked a significant moment in the history of mathematics and highlighted her lasting influence on future generations.", "answer": "Acknowledging achievement of a pioneer"}, {"label": "3", "text": "Sophie Germain made remarkable contributions to mathematics, particularly in number theory and elasticity. In 1816, she submitted work on number theory under a male pseudonym because women were not taken seriously in mathematics at that time. Later, in 1821, she won a prize from the Paris Academy of Sciences for her research on elasticity, but her achievements were often published or credited to male colleagues instead of her. Despite these challenges, her work was highly influential, and later generations recognised her contributions, proving that her talent had been overlooked for many years.", "answer": "Man unfairly credited"}, {"label": "4", "text": "Millicent Fawcett demonstrated remarkable intellectual ability from a young age. At just 19, she delivered a public lecture on Sir Isaac Newton at a time when women rarely spoke in academic settings. Although she did not pursue a professional career in mathematics, her early accomplishments in the subject reflected a sharp analytical mind. Over the decades, Fawcett dedicated herself to advocating for women’s education and suffrage, tirelessly working to open academic and political doors for future generations. Her lifelong commitment to intellectual and social progress stands as a testament to her exceptional capabilities and enduring influence.", "answer": "A long career showing exceptional ability"}, {"label": "5", "text": "When female mathematicians are described as 'women geniuses' or 'female prodigies', the gender label, while well-intended, often implies that excellence is rare among women. Such terms, though celebratory, can unintentionally reinforce the idea that women’s success in mathematics is unusual, rather than simply the result of talent and hard work.", "answer": "Labels can change perspective on people"}, {"label": "6", "text": "To address the gender imbalance in mathematics, many universities and organizations now run outreach programs, offer scholarships specifically for women, and encourage female mentorship in STEM fields. Some universities are required to arrange places where female mathematicians can work and research. These efforts aim not to give unfair advantage, but to create equal opportunities in a domain where women have historically been underrepresented.", "answer": "Attempting to create a gender balance"}, {"label": "7", "text": "In efforts to level the playing field, some institutions have implemented standardized criteria for admissions or research evaluation. However, such uniform methods can sometimes ignore the diverse paths and challenges faced by individuals, particularly women balancing academic and societal expectations. A one-size-fits-all approach may not always foster true equity.", "answer": "Uniformity is not always an advantage"}]}}];
+let currentTest = 0;
+let currentPart = "part1";
 const state = {};
 
-function el(tag, attrs={}, html="") {
-  const node = document.createElement(tag);
-  Object.entries(attrs).forEach(([k,v]) => {
-    if (k === "class") node.className = v;
-    else if (k === "dataset") Object.entries(v).forEach(([dk,dv]) => node.dataset[dk] = dv);
-    else node.setAttribute(k, v);
-  });
-  node.innerHTML = html;
-  return node;
+function el(tag, cls='', html='') {
+  const x = document.createElement(tag);
+  if (cls) x.className = cls;
+  x.innerHTML = html;
+  return x;
 }
 
-function getTotalQuestionCount() {
-  return DATA.part1.length + DATA.part4.reduce((n, item) => n + item.questions.length, 0);
+function esc(s) {
+  return String(s).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;");
 }
 
 function updateScore() {
-  let score = 0;
-  let total = getTotalQuestionCount();
-  for (const [key, val] of Object.entries(state)) {
-    if (val.correct === true) score += 1;
-  }
-  document.getElementById("score").textContent = score;
-  document.getElementById("total").textContent = total;
+  let s = 0;
+  Object.values(state).forEach(v => { if (v === true) s++; });
+  document.getElementById('score').textContent = s;
 }
 
-function createAudioLink(audio) {
-  if (!audio) return "";
-  const isUrl = /^https?:\/\//i.test(audio);
-  if (isUrl) {
-    return `<a class="linkbtn" href="${audio}" target="_blank">Mở audio</a>`;
-  }
-  return `<span class="small">Tên file audio: ${audio}</span>`;
+function makeTestTabs() {
+  const box = document.getElementById('testTabs');
+  box.innerHTML = '';
+  TESTS.forEach((t,i) => {
+    const b = el('button', i===currentTest ? 'active' : '', t.title);
+    b.onclick = () => {
+      currentTest = i;
+      currentPart = 'part1';
+      renderAll();
+    };
+    box.appendChild(b);
+  });
 }
 
-function checkAnswer(key, answer, selected, resultNode) {
-  const correct = answer === selected;
-  state[key] = { selected, correct };
-  resultNode.className = "result " + (correct ? "ok" : "bad");
-  resultNode.textContent = correct ? "Đúng rồi" : `Sai. Đáp án đúng là ${answer}`;
+function makePartTabs() {
+  const box = document.getElementById('partTabs');
+  box.innerHTML = '';
+  ['part1','part2','part3','part4','part5'].forEach(p => {
+    const b = el('button', p===currentPart ? 'active' : '', p.replace('part','Part '));
+    b.onclick = () => { currentPart = p; renderAll(); };
+    box.appendChild(b);
+  });
+}
+
+function renderPart1(part, testId) {
+  const wrap = el('div','card');
+  wrap.appendChild(el('div','section-title', part.title));
+  part.questions.forEach((q,qi) => {
+    wrap.appendChild(el('div','q', `${qi+1}. ${q.q}`));
+    q.options.forEach((op,oi) => {
+      const letter = String.fromCharCode(65+oi);
+      wrap.appendChild(el('label','opt', `<input type="radio" name="${testId}_p1_${qi}" value="${esc(op)}"> <strong>${letter}.</strong> ${esc(op)}`));
+    });
+    const check = el('button','', 'Chấm câu này');
+    const res = el('div','result');
+    const ans = el('div','box hidden', `<strong>Đáp án:</strong> ${esc(q.answer)}`);
+    const show = el('button','', 'Hiện đáp án');
+    show.onclick = () => ans.classList.toggle('hidden');
+    check.onclick = () => {
+      const chosen = document.querySelector(`input[name="${testId}_p1_${qi}"]:checked`);
+      if(!chosen) { res.className='result bad'; res.textContent='Bạn chưa chọn đáp án'; return; }
+      const ok = chosen.value === q.answer;
+      state[`${testId}_p1_${qi}`] = ok;
+      res.className = 'result ' + (ok ? 'ok' : 'bad');
+      res.textContent = ok ? 'Đúng' : 'Sai';
+      updateScore();
+    };
+    wrap.appendChild(check); wrap.appendChild(document.createTextNode(' ')); wrap.appendChild(show);
+    wrap.appendChild(res); wrap.appendChild(ans);
+  });
+  return wrap;
+}
+
+function renderOrdering(part) {
+  const wrap = el('div','card');
+  wrap.appendChild(el('div','section-title', part.title));
+  if (part.prompt) wrap.appendChild(el('div','small', part.prompt));
+  if (part.starter) wrap.appendChild(el('div','starter', `<strong>Starter:</strong> ${esc(part.starter)}`));
+  part.items.forEach((it,idx) => wrap.appendChild(el('div','opt', `${idx+1}. ${esc(it)}`)));
+  const box = el('div','box hidden', `<strong>Đáp án đúng:</strong><br>${esc(part.answer_text)}`);
+  const btn = el('button','', 'Hiện đáp án');
+  btn.onclick = ()=> box.classList.toggle('hidden');
+  wrap.appendChild(btn); wrap.appendChild(box);
+  return wrap;
+}
+
+function renderPart4(part, testId) {
+  const wrap = el('div','card');
+  wrap.appendChild(el('div','section-title', part.title));
+  if (part.prompt) wrap.appendChild(el('div','small', part.prompt));
+  const peopleWrap = el('div','grid2');
+  Object.entries(part.people).forEach(([k,v]) => {
+    peopleWrap.appendChild(el('div','box', `<strong>${k}</strong><br>${esc(v)}`));
+  });
+  wrap.appendChild(peopleWrap);
+
+  part.questions.forEach((q,qi) => {
+    wrap.appendChild(el('div','q', `${qi+1}. ${q.q}`));
+    const sel = document.createElement('select');
+    sel.innerHTML = `<option value="">-- Chọn --</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option>`;
+    const check = el('button','', 'Chấm');
+    const show = el('button','', 'Hiện đáp án');
+    const res = el('div','result');
+    const ans = el('div','box hidden', `<strong>Đáp án:</strong> ${q.answer}`);
+    show.onclick = ()=> ans.classList.toggle('hidden');
+    check.onclick = ()=> {
+      if(!sel.value) { res.className='result bad'; res.textContent='Bạn chưa chọn'; return; }
+      const ok = sel.value === q.answer;
+      state[`${testId}_p4_${qi}`] = ok;
+      res.className = 'result ' + (ok ? 'ok' : 'bad');
+      res.textContent = ok ? 'Đúng' : 'Sai';
+      updateScore();
+    };
+    wrap.appendChild(sel); wrap.appendChild(document.createTextNode(' ')); wrap.appendChild(check); wrap.appendChild(document.createTextNode(' ')); wrap.appendChild(show);
+    wrap.appendChild(res); wrap.appendChild(ans);
+  });
+  return wrap;
+}
+
+function renderPart5(part, testId) {
+  const wrap = el('div','card');
+  wrap.appendChild(el('div','section-title', part.title));
+  if (part.prompt) wrap.appendChild(el('div','small', part.prompt));
+  wrap.appendChild(el('div','box', `<strong>Headings:</strong><br>${part.headings.map((h,i)=>`${i+1}. ${esc(h)}`).join('<br>')}`));
+  part.paragraphs.forEach((p,pi) => {
+    wrap.appendChild(el('div','q', `Paragraph ${p.label}`));
+    wrap.appendChild(el('div','box', esc(p.text)));
+    const sel = document.createElement('select');
+    sel.innerHTML = `<option value="">-- Chọn heading --</option>` + part.headings.map(h=>`<option value="${esc(h)}">${esc(h)}</option>`).join('');
+    const check = el('button','', 'Chấm');
+    const show = el('button','', 'Hiện đáp án');
+    const res = el('div','result');
+    const ans = el('div','box hidden', `<strong>Đáp án:</strong> ${esc(p.answer)}`);
+    show.onclick = ()=> ans.classList.toggle('hidden');
+    check.onclick = ()=> {
+      if(!sel.value) { res.className='result bad'; res.textContent='Bạn chưa chọn'; return; }
+      const ok = sel.value === p.answer;
+      state[`${testId}_p5_${pi}`] = ok;
+      res.className = 'result ' + (ok ? 'ok' : 'bad');
+      res.textContent = ok ? 'Đúng' : 'Sai';
+      updateScore();
+    };
+    wrap.appendChild(sel); wrap.appendChild(document.createTextNode(' ')); wrap.appendChild(check); wrap.appendChild(document.createTextNode(' ')); wrap.appendChild(show);
+    wrap.appendChild(res); wrap.appendChild(ans);
+  });
+  return wrap;
+}
+
+function renderCurrent() {
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+  const test = TESTS[currentTest];
+  const part = test[currentPart];
+  app.appendChild(el('div','card', `<h2>${test.title}</h2><div class="small">Đang xem ${part.title}</div>`));
+  if (currentPart === 'part1') app.appendChild(renderPart1(part, test.id));
+  if (currentPart === 'part2') app.appendChild(renderOrdering(part));
+  if (currentPart === 'part3') app.appendChild(renderOrdering(part));
+  if (currentPart === 'part4') app.appendChild(renderPart4(part, test.id));
+  if (currentPart === 'part5') app.appendChild(renderPart5(part, test.id));
   updateScore();
 }
 
-function toggleBox(id) {
-  const box = document.getElementById(id);
-  box.classList.toggle("hidden");
+function renderAll() {
+  makeTestTabs();
+  makePartTabs();
+  renderCurrent();
 }
 
-function renderPart1() {
-  const wrap = el("div", {class:"grid"});
-  DATA.part1.forEach((item, idx) => {
-    const card = el("div", {class:"card"});
-    card.appendChild(el("div", {class:"badge"}, `Câu ${item.id}`));
-    card.appendChild(el("div", {class:"meta"}, item.audio ? createAudioLink(item.audio) : ""));
-    card.appendChild(el("div", {class:"question"}, item.question));
-
-    const opts = el("div", {class:"options"});
-    Object.entries(item.options).forEach(([k,v]) => {
-      const id = `p1_${idx}_${k}`;
-      const label = el("label", {class:"option", for:id}, `<input type="radio" name="p1_${idx}" id="${id}" value="${k}"> <strong>${k}.</strong> ${v}`);
-      opts.appendChild(label);
-    });
-    card.appendChild(opts);
-
-    const result = el("div", {class:"result"}, "");
-    const actions = el("div", {class:"actions"});
-    const checkBtn = el("button", {}, "Chấm câu này");
-    checkBtn.onclick = () => {
-      const chosen = document.querySelector(`input[name="p1_${idx}"]:checked`);
-      if (!chosen) {
-        result.className = "result bad";
-        result.textContent = "Bạn chưa chọn đáp án.";
-        return;
-      }
-      checkAnswer(`part1_${idx}`, item.answer, chosen.value, result);
-    };
-    const ansBtn = el("button", {}, "Hiện đáp án");
-    ansBtn.onclick = () => toggleBox(`ans_p1_${idx}`);
-    const trBtn = el("button", {}, "Hiện transcript");
-    trBtn.onclick = () => toggleBox(`tr_p1_${idx}`);
-    actions.append(checkBtn, ansBtn, trBtn);
-    card.append(actions, result);
-
-    card.appendChild(el("div", {class:"answer-box hidden", id:`ans_p1_${idx}`}, `<strong>Đáp án:</strong> ${item.answer} — ${item.options[item.answer]}`));
-    card.appendChild(el("div", {class:"transcript hidden", id:`tr_p1_${idx}`}, `<strong>Transcript:</strong><br>${item.transcript}`));
-    wrap.appendChild(card);
-  });
-  return wrap;
-}
-
-function renderPart2() {
-  const wrap = el("div", {class:"grid"});
-  wrap.appendChild(el("div", {class:"card"}, `
-    <div class="badge">Part 2</div>
-    <div class="small">Phần này trong file của bạn là dạng nghe theo chủ đề “A place for studying”, gồm 4 đoạn: trên phương tiện công cộng, ở nhà, quán cà phê và công viên.</div>
-  `));
-  DATA.part2.forEach((item, idx) => {
-    const card = el("div", {class:"card"});
-    card.appendChild(el("div", {class:"badge"}, item.speaker));
-    card.appendChild(el("div", {class:"meta"}, createAudioLink(item.audio)));
-    card.appendChild(el("div", {class:"question"}, item.topic));
-    const trBtn = el("button", {}, "Hiện transcript");
-    trBtn.onclick = () => toggleBox(`tr_p2_${idx}`);
-    card.appendChild(trBtn);
-    card.appendChild(el("div", {class:"transcript hidden", id:`tr_p2_${idx}`}, item.transcript));
-    wrap.appendChild(card);
-  });
-  return wrap;
-}
-
-function renderPart3() {
-  const wrap = el("div", {class:"grid"});
-  DATA.part3.forEach((item, idx) => {
-    const card = el("div", {class:"card"});
-    card.appendChild(el("div", {class:"badge"}, `Part 3 — ${item.topic}`));
-    card.appendChild(el("div", {class:"meta"}, createAudioLink(item.audio)));
-    const diaBtn = el("button", {}, "Hiện đoạn hội thoại");
-    diaBtn.onclick = () => toggleBox(`dialogue_${idx}`);
-    card.appendChild(diaBtn);
-    const dialogueHtml = item.dialogue.map(line => `<div style="margin:6px 0;">${line}</div>`).join("");
-    card.appendChild(el("div", {class:"transcript hidden", id:`dialogue_${idx}`}, dialogueHtml));
-
-    card.appendChild(el("div", {class:"question"}, "Chọn M / W / B cho từng ý"));
-    item.matching.forEach((m, mIdx) => {
-      const block = el("div", {class:"matching-item"});
-      block.innerHTML = `<div><strong>${mIdx+1}.</strong> ${m.statement}</div>`;
-      const select = el("select", {id:`match_${idx}_${mIdx}`}, `
-        <option value="">-- Chọn --</option>
-        <option value="M">M</option>
-        <option value="W">W</option>
-        <option value="B">B</option>
-      `);
-      block.appendChild(select);
-      const result = el("div", {class:"result", id:`match_result_${idx}_${mIdx}`}, "");
-      block.appendChild(result);
-      card.appendChild(block);
-    });
-
-    const action = el("button", {}, "Chấm Part 3");
-    action.onclick = () => {
-      item.matching.forEach((m, mIdx) => {
-        const sel = document.getElementById(`match_${idx}_${mIdx}`).value;
-        const result = document.getElementById(`match_result_${idx}_${mIdx}`);
-        if (!sel) {
-          result.className = "result bad";
-          result.textContent = "Bạn chưa chọn.";
-        } else {
-          result.className = "result " + (sel === m.answer ? "ok" : "bad");
-          result.textContent = sel === m.answer ? "Đúng" : `Sai. Đáp án: ${m.answer}`;
-        }
-      });
-    };
-    card.appendChild(el("div", {class:"small"}, "M = Man, W = Woman, B = Both"));
-    card.appendChild(action);
-    wrap.appendChild(card);
-  });
-  return wrap;
-}
-
-function renderPart4() {
-  const wrap = el("div", {class:"grid"});
-  DATA.part4.forEach((item, idx) => {
-    const card = el("div", {class:"card"});
-    card.appendChild(el("div", {class:"badge"}, `Topic: ${item.topic}`));
-    card.appendChild(el("div", {class:"meta"}, createAudioLink(item.audio)));
-    const trBtn = el("button", {}, "Hiện transcript");
-    trBtn.onclick = () => toggleBox(`tr_p4_${idx}`);
-    card.appendChild(trBtn);
-    card.appendChild(el("div", {class:"transcript hidden", id:`tr_p4_${idx}`}, item.transcript));
-
-    item.questions.forEach((q, qIdx) => {
-      card.appendChild(el("div", {class:"question"}, `${idx+1}.${qIdx+1}. ${q.question}`));
-      const opts = el("div", {class:"options"});
-      Object.entries(q.options).forEach(([k,v]) => {
-        const id = `p4_${idx}_${qIdx}_${k}`;
-        const label = el("label", {class:"option", for:id}, `<input type="radio" name="p4_${idx}_${qIdx}" id="${id}" value="${k}"> <strong>${k}.</strong> ${v}`);
-        opts.appendChild(label);
-      });
-      card.appendChild(opts);
-      const result = el("div", {class:"result", id:`r_p4_${idx}_${qIdx}`}, "");
-      card.appendChild(result);
-      const btn = el("button", {}, "Chấm câu này");
-      btn.onclick = () => {
-        const chosen = document.querySelector(`input[name="p4_${idx}_${qIdx}"]:checked`);
-        if (!chosen) {
-          result.className = "result bad";
-          result.textContent = "Bạn chưa chọn đáp án.";
-          return;
-        }
-        checkAnswer(`part4_${idx}_${qIdx}`, q.answer, chosen.value, result);
-      };
-      card.appendChild(btn);
-      card.appendChild(el("div", {class:"answer-box"}, `<strong>Đáp án:</strong> ${q.answer} — ${q.options[q.answer]}`));
-    });
-    wrap.appendChild(card);
-  });
-  return wrap;
-}
-
-function render() {
-  const content = document.getElementById("content");
-  content.innerHTML = "";
-  let block;
-  if (currentTab === "part1") block = renderPart1();
-  if (currentTab === "part2") block = renderPart2();
-  if (currentTab === "part3") block = renderPart3();
-  if (currentTab === "part4") block = renderPart4();
-  content.appendChild(block);
-  updateScore();
-}
-
-document.querySelectorAll(".tab").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    currentTab = btn.dataset.tab;
-    render();
-  });
-});
-
-document.getElementById("resetBtn").addEventListener("click", () => {
-  for (const key in state) delete state[key];
-  render();
-});
-
-render();
+renderAll();
 </script>
 </body>
 </html>
